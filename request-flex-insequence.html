@@ -278,6 +278,10 @@
       width: 300px;
       height: 40px;
     }
+    .form-select:focus, .form-input:focus, .shifts-input:focus {
+      outline: none;
+      border: 1px solid var(--black-alpha-200);
+    }
     .form-select {
       padding-right: 36px;
       cursor: pointer;
@@ -312,6 +316,48 @@
     .add-shift-btn { display: inline-flex; align-items: center; justify-content: center; padding: 6px 16px; height: 40px; background: var(--main-white); border: 1px solid var(--black-alpha-200); border-radius: var(--radius-lg); font-size: 16px; font-weight: 500; color: var(--app-primary); cursor: pointer; flex-shrink: 0; }
     .add-shift-btn:hover { background: var(--gray-50); }
     .submit-btn { padding: 12px 24px; background: var(--stone-700); color: var(--main-white); border: none; border-radius: 8px; font-size: 16px; font-weight: 500; cursor: pointer; display: block; margin: 0 auto; }
+    .submit-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* Success screen */
+    .success-card { flex: 0 0 520px; max-width: 520px; min-width: 0; background: var(--main-white); border: 1px solid var(--black-alpha-100); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: 32px 24px 48px; flex-shrink: 0; display: none; flex-direction: column; min-height: 360px; }
+    .success-card.visible { display: flex; }
+    .success-icon-wrap { display: flex; width: 40px; height: 40px; position: relative; align-self: center; justify-content: center; align-items: center; margin-bottom: 8px; }
+    .success-icon-bg { width: 100%; height: 100%; background-color: var(--green-100); position: absolute; top: 0; left: 0; border-radius: 50%; z-index: 0; }
+    .success-icon { position: relative; z-index: 1; width: 32px; height: 32px; color: var(--green-500); }
+    .success-heading { font-size: 24px; font-weight: 600; color: var(--green-500); text-align: center; margin-bottom: 32px; }
+    .success-divider { border: none; border-top: 1px solid var(--black-alpha-100); margin: 0 -24px 32px; }
+    .booked-flex-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0; }
+    .booked-flex-info { display: flex; flex-direction: column; gap: 2px; flex: 1; }
+    .booked-flex-title { font-size: 24px; font-weight: 700; color: var(--app-primary); margin: 0; }
+    .cancel-btn { padding: 6px 16px; background: var(--main-white); border: 1px solid var(--gray-100); border-radius: 6px; font-size: 14px; font-weight: 500; color: var(--app-primary); cursor: pointer; flex-shrink: 0; }
+    .cancel-btn:hover { background: var(--gray-50); }
+    .booked-flex-location { display: flex; align-items: center; gap: 4px; color: var(--app-primary); font-size: 16px; font-weight: 400; margin-bottom: 16px; }
+    .booked-flex-location .lucide { width: 16px; height: 16px; color: var(--app-primary); }
+    .booked-flex-date { font-size: 18px; font-weight: 500; color: var(--app-primary); margin-bottom: 8px; }
+    .booked-flex-time { display: flex; align-items: center; gap: 6px; color: var(--app-primary); font-size: 16px; font-weight: 400; margin-bottom: 4px; }
+    .booked-flex-time .lucide { width: 16px; height: 16px; color: var(--app-primary); }
+    .booked-flex-role { display: flex; align-items: center; gap: 6px; color: var(--app-primary); font-size: 16px; font-weight: 400; margin-bottom: 4px; }
+    .booked-flex-role .lucide { width: 16px; height: 16px; color: var(--app-primary); }
+    .booked-flex-total-hrs { display: flex; align-items: center; gap: 4px; color: var(--app-primary); font-size: 16px; font-weight: 400; margin-bottom: 0; }
+    .booked-flex-total-hrs .lucide { width: 16px; height: 16px; color: var(--app-primary); }
+    .booked-flex-shift { margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid var(--black-alpha-100); }
+    .booked-flex-shift:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+    .success-footer { text-align: center; margin-top: auto; }
+    .success-subtext { font-size: 14px; color: var(--text-hint); margin-bottom: 16px; }
+    .success-subtext a { color: var(--app-primary); }
+    .request-more-btn { padding: 12px 24px; background: var(--stone-700); color: var(--main-white); border: none; border-radius: 8px; font-size: 16px; font-weight: 500; cursor: pointer; }
+
+    /* Flatpickr past/disabled days */
+    .flatpickr-day.flatpickr-disabled,
+    .flatpickr-day.flatpickr-disabled:hover,
+    .flatpickr-calendar .flatpickr-day.flatpickr-disabled,
+    .flatpickr-calendar .flatpickr-day.flatpickr-disabled:hover {
+      color: var(--app-secondary) !important;
+      cursor: not-allowed !important;
+      background: transparent !important;
+      opacity: 0.45 !important;
+      pointer-events: none !important;
+    }
     .submit-summary { text-align: center; font-size: 16px; color: var(--text-hint); margin-top: 8px; margin-bottom: 0; }
 
     /* QuestionRoles - role checkboxes */
@@ -322,20 +368,22 @@
     }
     .role-category:last-child { padding-bottom: 0; }
     .role-category:not(:last-child) .role-chips { padding-bottom: 16px; border-bottom: 1px solid var(--black-alpha-200); }
-    .role-category-label { width: 120px; flex-shrink: 0; font-size: 16px; color: var(--text-hint); }
+    .role-category-label { width: 120px; flex-shrink: 0; font-size: 16px; color: var(--app-primary); }
     .role-chips { display: flex; flex-wrap: wrap; gap: 8px; }
     .role-chip {
       display: inline-flex; align-items: center; gap: 8px;
       padding: 0 8px; border-radius: 8px; height: 36px;
       border: 1px solid var(--black-alpha-200);
       background: var(--main-white);
-      font-size: 16px; font-weight: 400; color: var(--text-primary);
+      font-size: 16px; font-weight: 400; color: var(--app-primary);
       cursor: pointer; transition: all 0.15s;
       height: 32px;
     }
     .role-chip:hover { border-color: var(--green-100); background: var(--green-100); color: var(--green-600); }
+    .role-chip:hover .chip-icon, .role-chip:hover .lucide, .role-chip:hover svg { color: inherit; stroke: currentColor; }
     .role-chip.checked { border-color: var(--green-200); background: var(--green-100); color: var(--green-600); }
-    .role-chip .chip-icon, .role-chip .lucide, .role-chip svg { width: 20px; height: 20px; flex-shrink: 0; stroke: currentColor; }
+    .role-chip.checked .chip-icon, .role-chip.checked .lucide, .role-chip.checked svg { color: inherit; stroke: currentColor; }
+    .role-chip .chip-icon, .role-chip .lucide, .role-chip svg { width: 20px; height: 20px; flex-shrink: 0; stroke: currentColor; color: var(--app-primary); }
 
     /* Right column - RequestSummary + RequestWorkerCalendar; fixed width, clipped when narrow */
     .right-column {
@@ -361,11 +409,15 @@
       max-width: 320px;
     }
     .summary-title { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
-    .summary-row { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--black-alpha-700); margin-bottom: 4px; }
-    .summary-icon, .summary-row .lucide, .summary-row svg { width: 16px; height: 16px; flex-shrink: 0; }
+    .summary-row { display: flex; align-items: flex-start; gap: 8px; font-size: 16px; color: var(--app-primary); margin-bottom: 8px; }
+    .summary-icon-wrap { padding-top: 2px; flex-shrink: 0; }
+    .summary-icon, .summary-row .lucide, .summary-row svg, .summary-icon-wrap svg { width: 16px !important; height: 16px !important; flex-shrink: 0; }
+    #summary-date-text { line-height: 20px; }
     .budget-section { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--black-alpha-200); }
     .budget-label { font-size: 18px; font-weight: 500; margin-bottom: 4px; }
-    .budget-row { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 8px; }
+    .budget-period { margin-bottom: 16px; }
+    .budget-period:last-child { margin-bottom: 0; }
+    .budget-row { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 8px; color: var(--app-primary); }
     .budget-row .budget-hours { font-size: 12px; color: var(--text-hint); }
     .budget-bar { height: 20px; background: #EDEDED; border-radius: 6px; overflow: hidden; position: relative; display: flex; }
     .budget-fill { height: 100%; background: #70B9B3; border-radius: 6px 0 0 6px; width: 25%; min-width: 20px; flex-shrink: 0; }
@@ -374,17 +426,23 @@
     /* RequestWorkerCalendar */
     .calendar-card { margin-top: 0; }
     .calendar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-    .calendar-month { font-size: 20px; font-weight: 600; }
-    .calendar-nav-btn { width: 28px; height: 28px; border: 1px solid var(--black-alpha-200); border-radius: 50%; background: var(--main-white); cursor: pointer; font-size: 14px; }
+    .calendar-month { font-size: 20px; color: #18181B; display: flex; align-items: center; gap: 4px; }
+    .calendar-month .cal-month-name { font-weight: 600; }
+    .calendar-month .cal-month-year { font-weight: 400; }
+    .calendar-nav-btn { width: 28px; height: 28px; border: 1px solid var(--black-alpha-200); border-radius: 50%; background: var(--main-white); cursor: pointer; font-size: 14px; display: inline-flex; align-items: center; justify-content: center; line-height: 1; }
     .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; font-size: 14px; }
     .calendar-dow { text-align: center; color: var(--text-hint); padding: 4px 0; font-size: 14px; }
-    .calendar-day { text-align: center; padding: 6px; border-radius: 6px; cursor: pointer; color: var(--text-primary); font-weight: 500; }
+    .calendar-day { text-align: center; padding: 4px 6px; border-radius: 6px; cursor: pointer; color: var(--app-primary); font-weight: 500; display: flex; flex-direction: column; align-items: center; gap: 2px; }
     .calendar-day:hover { background: var(--black-alpha-100); }
-    .calendar-day.selected { background: var(--main-dark); color: #fff; }
-    .calendar-day.today { border: 1px solid var(--black-alpha-200); font-weight: 600; }
+    .calendar-day.today { background: var(--gray-100); color: var(--app-primary); border-radius: 50%; width: 30px; height: 30px; padding: 0; justify-content: center; align-items: center; margin: 0 auto; font-weight: 600; line-height: 1; }
+    .calendar-day.today .day-dots { display: none; }
+    .calendar-day.selected { background: var(--app-primary); color: #fff; border-radius: 50%; width: 30px; height: 30px; padding: 0; justify-content: center; align-items: center; margin: 0 auto; font-weight: 600; line-height: 1; }
+    .calendar-day.selected .day-dots { display: none; }
+    .day-dots { display: flex; gap: 2px; justify-content: center; min-height: 5px; }
+    .shift-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--app-primary); display: block; flex-shrink: 0; }
     .schedule-section { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--black-alpha-200); }
     .schedule-title { font-size: 14px; font-weight: 500; color: var(--app-secondary); margin-bottom: 12px; }
-    .schedule-item { display: flex; align-items: center; gap: 6px; padding: 8px 0; font-size: 14px; color: var(--text-primary); }
+    .schedule-item { display: flex; align-items: center; gap: 6px; padding: 8px 0; font-size: 14px; color: var(--app-primary); }
     .schedule-item .schedule-time-wrap { display: flex; align-items: center; gap: 6px; flex-grow: 1; }
     .schedule-item .schedule-time-wrap .lucide { width: 16px; height: 16px; flex-shrink: 0; color: var(--text-hint); }
     .schedule-time { font-weight: 500; }
@@ -452,17 +510,22 @@
     .date-input-wrap .flatpickr-current-month .numInputWrapper .arrowUp,
     .date-input-wrap .flatpickr-current-month .numInputWrapper .arrowDown { display: none; }
     .date-input-wrap .flatpickr-prev-month,
-    .date-input-wrap .flatpickr-next-month { position: static !important; display: flex; align-items: center; justify-content: center; padding: 0; width: 16px; height: 16px; }
-    .date-input-wrap .flatpickr-prev-month svg,
-    .date-input-wrap .flatpickr-next-month svg { width: 20px; height: 20px; }
-    .date-input-wrap .fp-nav { display: flex; align-items: center; gap: 16px; }
-    .date-input-wrap .flatpickr-day.prototype-today {
-      background: var(--gray-100) !important; color: var(--app-primary) !important; border-color: var(--gray-100) !important;
-      border-radius: 50%; width: 32px !important; height: 32px !important; line-height: 32px !important;
-      max-width: 32px; align-self: center; font-weight: 600;
+    .date-input-wrap .flatpickr-next-month {
+      position: static !important; display: flex; align-items: center; justify-content: center;
+      padding: 0; width: 32px; height: 32px;
+      border: 1px solid var(--black-alpha-200); border-radius: 50%;
+      background: var(--main-white); cursor: pointer;
     }
-    .date-input-wrap .flatpickr-day.prototype-today:hover {
-      background: var(--gray-100) !important; border-color: var(--gray-100) !important; color: var(--app-primary) !important;
+    .date-input-wrap .flatpickr-prev-month:hover,
+    .date-input-wrap .flatpickr-next-month:hover { background: var(--gray-50); }
+    .date-input-wrap .flatpickr-prev-month svg,
+    .date-input-wrap .flatpickr-next-month svg { width: 16px; height: 16px; }
+    .date-input-wrap .fp-nav { display: flex; align-items: center; gap: 10px; }
+    .date-input-wrap .flatpickr-day.today,
+    .date-input-wrap .flatpickr-day.today:hover,
+    .date-input-wrap .flatpickr-day.today:focus {
+      background: var(--gray-100) !important; color: var(--app-primary) !important; border: none !important; outline: none !important; box-shadow: none !important;
+      border-radius: 50% !important; width: 32px !important; height: 32px !important; line-height: 32px !important; max-width: 32px; align-self: center; font-weight: 600;
     }
     .date-input-wrap .flatpickr-day.selected,
     .date-input-wrap .flatpickr-day.selected:hover,
@@ -576,7 +639,7 @@
       font-size: 12px;
     }
     .variant-link:hover {
-      background: var(--black-alpha-100);
+      background: none;
       color: var(--app-primary);
     }
     .variant-link.active {
@@ -669,8 +732,7 @@
                   <label class="form-label-sm">Start Time</label>
                   <div class="start-end-time-group">
                     <select class="form-select form-select-hour">
-                      <option value="">Select</option>
-                      <option value="12">12</option>
+                      <option value="">Hour</option>
                       <option value="1">1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
@@ -682,18 +744,19 @@
                       <option value="9">9</option>
                       <option value="10">10</option>
                       <option value="11">11</option>
+                      <option value="12">12</option>
                     </select>
                     <div class="time-sep-wrap"><span class="time-sep">:</span></div>
                     <select class="form-select form-select-min">
-                      <option value="">Select</option>
+                      <option value="">Mins</option>
                       <option value="00">00</option>
                       <option value="15">15</option>
                       <option value="30">30</option>
                       <option value="45">45</option>
                     </select>
                     <select class="form-select form-select-ampm">
-                      <option selected>AM</option>
-                      <option>PM</option>
+                      <option value="AM" selected>AM</option>
+                      <option value="PM">PM</option>
                     </select>
                   </div>
                 </div>
@@ -701,8 +764,7 @@
                   <label class="form-label-sm">End</label>
                   <div class="start-end-time-group">
                     <select class="form-select form-select-hour">
-                      <option value="">Select</option>
-                      <option value="12">12</option>
+                      <option value="">Hour</option>
                       <option value="1">1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
@@ -714,18 +776,19 @@
                       <option value="9">9</option>
                       <option value="10">10</option>
                       <option value="11">11</option>
+                      <option value="12">12</option>
                     </select>
                     <div class="time-sep-wrap"><span class="time-sep">:</span></div>
                     <select class="form-select form-select-min">
-                      <option value="">Select</option>
+                      <option value="">Mins</option>
                       <option value="00">00</option>
                       <option value="15">15</option>
                       <option value="30">30</option>
                       <option value="45">45</option>
                     </select>
                     <select class="form-select form-select-ampm">
-                      <option selected>AM</option>
-                      <option>PM</option>
+                      <option value="AM" selected>AM</option>
+                      <option value="PM">PM</option>
                     </select>
                   </div>
                 </div>
@@ -767,12 +830,12 @@
               <label class="form-label">Ends After</label>
               <div class="ends-after-row">
                 <div class="date-input-wrap ends-date">
-                  <input type="text" class="form-input date-input" placeholder="Select" readonly />
+                  <input type="text" id="ends-date-input" class="form-input date-input" placeholder="Select" readonly />
                   <i data-lucide="calendar" class="date-icon"></i>
                 </div>
                 <span class="or-label">or</span>
                 <div class="shifts-wrap">
-                  <input type="number" min="1" class="shifts-input" placeholder="Enter" />
+                  <input type="number" min="1" id="shifts-count-input" class="shifts-input" placeholder="Enter" />
                   <span class="shifts-label">shifts</span>
                 </div>
               </div>
@@ -795,7 +858,7 @@
               </div>
               <div class="form-row-item people-item">
                 <label class="form-label">Number of People</label>
-                <select class="form-select">
+                <select id="people-select" class="form-select">
                   <option value="">Select</option>
                   <option>1</option>
                   <option>2</option>
@@ -816,7 +879,7 @@
               <div class="role-category">
                 <div class="role-category-label">Front of House</div>
                 <div class="role-chips">
-                  <button type="button" class="role-chip checked" data-role="Sales Associate"><i data-lucide="shopping-bag" class="chip-icon"></i>Sales Associate</button>
+                  <button type="button" class="role-chip" data-role="Sales Associate"><i data-lucide="shopping-bag" class="chip-icon"></i>Sales Associate</button>
                   <button type="button" class="role-chip" data-role="Greeter"><i data-lucide="smile" class="chip-icon"></i>Greeter</button>
                   <button type="button" class="role-chip" data-role="Fitting Rooms"><i data-lucide="shirt" class="chip-icon"></i>Fitting Rooms</button>
                   <button type="button" class="role-chip" data-role="Floor Organization"><i data-lucide="layout-grid" class="chip-icon"></i>Floor Organization</button>
@@ -848,8 +911,23 @@
               <button class="add-shift-btn"><i data-lucide="plus" style="width:20px;height:20px;margin-right:6px"></i>Add Additional</button>
               <div class="add-additional-divider"></div>
             </div>
-            <button class="submit-btn" style="width:100%;">Submit Request</button>
+            <button class="submit-btn" style="width:100%;" disabled>Submit Request</button>
             <p class="submit-summary">1 Flex, 3 Hours</p>
+          </div>
+        </section>
+
+        <!-- Success screen (hidden by default) -->
+        <section id="success-card" class="success-card">
+          <div class="success-icon-wrap">
+            <div class="success-icon-bg"></div>
+            <i data-lucide="check" class="success-icon"></i>
+          </div>
+          <h2 class="success-heading">Request Submitted</h2>
+          <hr class="success-divider" />
+          <div id="success-shifts-container"></div>
+          <div class="success-footer">
+            <p class="success-subtext">Check the status by viewing your open <a href="#">flexes</a>.</p>
+            <button class="request-more-btn" id="request-more-btn">Request More Flexes</button>
           </div>
         </section>
 
@@ -857,19 +935,19 @@
         <aside id="right-column" class="right-column visible">
           <div class="summary-card">
             <h2 class="summary-title">Request Summary</h2>
-            <div class="summary-row"><i data-lucide="map-pin" class="summary-icon"></i> Galleria - Houston</div>
-            <div class="summary-row"><i data-lucide="clock" class="summary-icon"></i> CDT US/Central</div>
+            <div class="summary-row" id="summary-date-row"><div class="summary-icon-wrap"><i data-lucide="calendar" class="summary-icon"></i></div><span id="summary-date-text">Select Date</span></div>
+            <div class="summary-row" id="summary-time-row"><div class="summary-icon-wrap"><i data-lucide="clock" class="summary-icon"></i></div><span id="summary-time-text">CDT US/Central</span></div>
+            <div class="summary-row"><div class="summary-icon-wrap"><i data-lucide="map-pin" class="summary-icon"></i></div><span id="summary-location-text">Select Location</span></div>
+            <div class="summary-row" id="summary-roles-row" style="cursor:pointer;"><div class="summary-icon-wrap"><i data-lucide="user-plus" class="summary-icon"></i></div><span id="summary-roles-text">Add Support</span></div>
             <div class="budget-section">
               <div class="budget-label">Budget Impact</div>
-              <div class="budget-row"><span>Mar '25</span><span>Requesting 4h</span></div>
-              <div class="budget-bar"><div class="budget-fill"></div><div class="budget-requested"></div></div>
-              <div class="budget-row" style="margin-top:4px;"><span></span><span class="budget-hours">250h</span></div>
+              <div id="budget-periods-container"></div>
             </div>
           </div>
 
           <div class="summary-card calendar-card">
             <div class="calendar-header">
-              <span class="calendar-month">March 2025</span>
+              <span class="calendar-month"><span class="cal-month-name">March</span><span class="cal-month-year">2026</span></span>
               <div>
                 <button class="calendar-nav-btn">‹</button>
                 <button class="calendar-nav-btn">›</button>
@@ -877,19 +955,18 @@
             </div>
             <div class="calendar-grid">
               <div class="calendar-dow">Sun</div><div class="calendar-dow">Mon</div><div class="calendar-dow">Tue</div><div class="calendar-dow">Wed</div><div class="calendar-dow">Thu</div><div class="calendar-dow">Fri</div><div class="calendar-dow">Sat</div>
-              <div class="calendar-day"></div><div class="calendar-day"></div><div class="calendar-day"></div><div class="calendar-day"></div><div class="calendar-day"></div><div class="calendar-day">1</div><div class="calendar-day">2</div>
-              <div class="calendar-day selected">3</div><div class="calendar-day">4</div><div class="calendar-day">5</div><div class="calendar-day">6</div><div class="calendar-day">7</div><div class="calendar-day">8</div><div class="calendar-day">9</div>
-              <div class="calendar-day">10</div><div class="calendar-day">11</div><div class="calendar-day">12</div><div class="calendar-day">13</div><div class="calendar-day">14</div><div class="calendar-day">15</div><div class="calendar-day">16</div>
-              <div class="calendar-day">17</div><div class="calendar-day">18</div><div class="calendar-day">19</div><div class="calendar-day">20</div><div class="calendar-day">21</div><div class="calendar-day">22</div><div class="calendar-day">23</div>
-              <div class="calendar-day">24</div><div class="calendar-day">25</div><div class="calendar-day">26</div><div class="calendar-day">27</div><div class="calendar-day">28</div><div class="calendar-day">29</div><div class="calendar-day">30</div>
-              <div class="calendar-day">31</div>
+              <div class="calendar-day" data-date="2026-03-01">1</div><div class="calendar-day" data-date="2026-03-02">2</div><div class="calendar-day" data-date="2026-03-03">3</div><div class="calendar-day" data-date="2026-03-04">4</div><div class="calendar-day" data-date="2026-03-05">5</div><div class="calendar-day" data-date="2026-03-06">6</div><div class="calendar-day" data-date="2026-03-07">7</div>
+              <div class="calendar-day" data-date="2026-03-08">8</div><div class="calendar-day" data-date="2026-03-09">9</div><div class="calendar-day" data-date="2026-03-10">10<div class="day-dots"><span class="shift-dot"></span></div></div><div class="calendar-day" data-date="2026-03-11">11</div><div class="calendar-day" data-date="2026-03-12">12</div><div class="calendar-day" data-date="2026-03-13">13</div><div class="calendar-day" data-date="2026-03-14">14</div>
+              <div class="calendar-day" data-date="2026-03-15">15</div><div class="calendar-day" data-date="2026-03-16">16</div><div class="calendar-day" data-date="2026-03-17">17</div><div class="calendar-day" data-date="2026-03-18">18</div><div class="calendar-day" data-date="2026-03-19">19</div><div class="calendar-day" data-date="2026-03-20">20</div><div class="calendar-day" data-date="2026-03-21">21</div>
+              <div class="calendar-day" data-date="2026-03-22">22</div><div class="calendar-day" data-date="2026-03-23">23</div><div class="calendar-day" data-date="2026-03-24">24</div><div class="calendar-day" data-date="2026-03-25">25</div><div class="calendar-day" data-date="2026-03-26">26</div><div class="calendar-day" data-date="2026-03-27">27</div><div class="calendar-day" data-date="2026-03-28">28</div>
+              <div class="calendar-day" data-date="2026-03-29">29</div><div class="calendar-day" data-date="2026-03-30">30</div><div class="calendar-day" data-date="2026-03-31">31</div><div class="calendar-day" data-date="2026-04-01"></div><div class="calendar-day" data-date="2026-04-02"></div><div class="calendar-day" data-date="2026-04-03"></div><div class="calendar-day" data-date="2026-04-04"></div>
             </div>
             <div class="schedule-section">
-              <div class="schedule-title">1 Shift on Mar 3rd</div>
+              <div class="schedule-title">1 Shift on Mar 10th</div>
               <div class="schedule-item">
                 <div class="schedule-time-wrap">
                   <i data-lucide="calendar" aria-hidden="true"></i>
-                  <span class="schedule-time">3/3 · 10am-5:30pm</span>
+                  <span class="schedule-time">3/10 · 10am-5:30pm</span>
                 </div>
                 <span class="schedule-badge">Finding Reflexer</span>
               </div>
@@ -932,32 +1009,432 @@
 
       // Flex time pills — mutually exclusive toggle
       var flexPills = document.querySelectorAll('.flex-pill');
+
+      function updateFlexInfo() {
+        updateDatetimeSummary();
+      }
+
       flexPills.forEach(function(pill) {
         pill.addEventListener('click', function() {
           var wasActive = this.classList.contains('active');
           flexPills.forEach(function(p) { p.classList.remove('active'); });
           if (!wasActive) this.classList.add('active');
+          updateFlexInfo();
         });
       });
 
+      function checkFormValid() {
+        var locationOk = (document.getElementById('location-select').value !== '');
+        var dateOk = (document.querySelector('.date-input') && document.querySelector('.date-input').value !== '');
+        var chipsOk = document.querySelectorAll('.role-chip.checked').length > 0;
+        var btn = document.querySelector('.submit-btn');
+        btn.disabled = !(locationOk && dateOk && chipsOk);
+      }
+
+      function updateRolesSummary() {
+        var checked = document.querySelectorAll('.role-chip.checked');
+        var rolesText = document.getElementById('summary-roles-text');
+        if (checked.length > 0) {
+          var peopleSel = document.getElementById('people-select');
+          var count = (peopleSel && peopleSel.value) ? peopleSel.value : checked.length;
+          var names = Array.from(checked).map(function(c) { return c.getAttribute('data-role'); }).join(', ');
+          rolesText.textContent = '(' + count + ') ' + names;
+        } else {
+          rolesText.textContent = 'Add Support';
+        }
+      }
+
       document.querySelectorAll('.role-chip').forEach(function(btn) {
-        btn.addEventListener('click', function() { this.classList.toggle('checked'); });
+        btn.addEventListener('click', function() { this.classList.toggle('checked'); checkFormValid(); updateRolesSummary(); });
+      });
+
+      document.getElementById('location-select').addEventListener('change', checkFormValid);
+      document.querySelector('.date-input').addEventListener('change', checkFormValid);
+      var peopleSel = document.getElementById('people-select');
+      if (peopleSel) peopleSel.addEventListener('change', function() { updateRolesSummary(); updateSummaryPanel(); });
+
+      checkFormValid();
+
+      // Summary panel helpers
+      function toHour24(h, ampm) {
+        if (ampm === 'PM' && h !== 12) return h + 12;
+        if (ampm === 'AM' && h === 12) return 0;
+        return h;
+      }
+
+      var startBlock = document.querySelector('.start-block');
+      var endBlock = document.querySelector('.end-block');
+
+      function getProposedShiftCount() {
+        var repeatSel = document.getElementById('repeat-select');
+        if (!repeatSel || !repeatSel.value || repeatSel.value === 'Does not repeat') return 1;
+        var mainDateInput = document.querySelector('.form-section .date-input-wrap:not(.ends-date) .date-input') || document.querySelectorAll('.date-input')[0];
+        var dateVal = mainDateInput ? mainDateInput.value : '';
+        if (!dateVal) return 1;
+        var freqRaw = repeatSel.options[repeatSel.selectedIndex] ? repeatSel.options[repeatSel.selectedIndex].text : repeatSel.value;
+        var freqDays = 1;
+        if (freqRaw.indexOf('weekly') >= 0 && freqRaw.indexOf('2') >= 0) freqDays = 14;
+        else if (freqRaw.indexOf('weekly') >= 0 && freqRaw.indexOf('4') >= 0) freqDays = 28;
+        else if (freqRaw.indexOf('weekly') >= 0) freqDays = 7;
+        var endsDateInput = document.getElementById('ends-date-input');
+        var shiftsInput = document.getElementById('shifts-count-input');
+        if (endsDateInput && endsDateInput.value) {
+          var startD = new Date(dateVal);
+          var endD = new Date(endsDateInput.value);
+          if (isNaN(startD.getTime()) || isNaN(endD.getTime())) return 1;
+          startD.setHours(0, 0, 0, 0);
+          endD.setHours(0, 0, 0, 0);
+          var ms = endD - startD;
+          return Math.max(1, Math.floor(ms / (freqDays * 24 * 60 * 60 * 1000)) + 1);
+        }
+        if (shiftsInput && shiftsInput.value) {
+          var n = parseInt(shiftsInput.value, 10);
+          return (n > 0) ? n : 1;
+        }
+        return 1;
+      }
+
+      function updateSummaryPanel() {
+        var locationSel = document.getElementById('location-select');
+        var locationText = locationSel.options[locationSel.selectedIndex] ? locationSel.options[locationSel.selectedIndex].text : '';
+        var locSpan = document.getElementById('summary-location-text');
+        if (locSpan) locSpan.textContent = locationText || 'Select Location';
+
+        var sh = parseInt(startBlock.querySelector('.form-select-hour').value, 10);
+        var eh = parseInt(endBlock.querySelector('.form-select-hour').value, 10);
+        var hours = 0;
+        if (!isNaN(sh) && !isNaN(eh)) {
+          var s24 = toHour24(sh, startBlock.querySelector('.form-select-ampm').value);
+          var e24 = toHour24(eh, endBlock.querySelector('.form-select-ampm').value);
+          hours = Math.max(0, e24 - s24);
+        }
+        var shiftCount = getProposedShiftCount();
+        var peopleSel = document.getElementById('people-select');
+        var numPeople = (peopleSel && peopleSel.value) ? parseInt(peopleSel.value, 10) : 1;
+        if (isNaN(numPeople) || numPeople < 1) numPeople = 1;
+        var totalHours = hours * shiftCount * numPeople;
+
+        // Budget periods: one per month that has shifts
+        var shiftDates = getShiftDates();
+        if (shiftDates.length === 0) {
+          var mainInp = document.querySelector('.form-section .date-input-wrap:not(.ends-date) .date-input');
+          if (mainInp && mainInp.value) shiftDates = [new Date(mainInp.value)];
+        }
+        var periodMap = {};
+        shiftDates.forEach(function(d) {
+          var y = d.getFullYear();
+          var m = d.getMonth();
+          var key = y + '-' + String(m + 1).padStart(2, '0');
+          if (!periodMap[key]) periodMap[key] = { year: y, month: m, shiftCount: 0 };
+          periodMap[key].shiftCount += 1;
+        });
+        var periods = Object.keys(periodMap).sort().map(function(k) {
+          var p = periodMap[k];
+          return { year: p.year, month: p.month, hours: p.shiftCount * hours * numPeople };
+        });
+        if (periods.length === 0) periods = [{ year: new Date().getFullYear(), month: new Date().getMonth(), hours: totalHours || 0 }];
+
+        var container = document.getElementById('budget-periods-container');
+        if (container) {
+          container.innerHTML = '';
+          var monthNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+          periods.forEach(function(p) {
+            var periodDiv = document.createElement('div');
+            periodDiv.className = 'budget-period';
+            var lbl = monthNames[p.month] + " '" + String(p.year).slice(-2);
+            var pct = Math.min(90, Math.round((p.hours / 250) * 45));
+            periodDiv.innerHTML = '<div class="budget-row"><span>' + lbl + '</span><span class="budget-requesting-text">Requesting ' + p.hours + 'h</span></div>' +
+              '<div class="budget-bar"><div class="budget-fill"></div><div class="budget-requested" style="width:' + pct + '%"></div></div>' +
+              '<div class="budget-row" style="margin-top:4px;"><span></span><span class="budget-hours">250h</span></div>';
+            container.appendChild(periodDiv);
+          });
+        }
+      }
+
+      function updateDatetimeSummary() {
+        var dateSpan = document.getElementById('summary-date-text');
+        var timeSpan = document.getElementById('summary-time-text');
+        if (!dateSpan || !timeSpan) return;
+
+        var mainDateInput = document.querySelector('.form-section .date-input-wrap:not(.ends-date) .date-input') || document.querySelectorAll('.date-input')[0];
+        var dateVal = mainDateInput ? mainDateInput.value : '';
+        var base = dateVal || 'Select Date';
+
+        var repeatSel = document.getElementById('repeat-select');
+        var endsDateInput = document.getElementById('ends-date-input');
+        var shiftsInput = document.getElementById('shifts-count-input');
+        if (repeatSel && repeatSel.value && repeatSel.value !== 'Does not repeat') {
+          var freqRaw = repeatSel.options[repeatSel.selectedIndex] ? repeatSel.options[repeatSel.selectedIndex].text : repeatSel.value;
+          var freq = freqRaw.replace(/\b\w/g, function(c) { return c.toUpperCase(); });
+          var suffix = '';
+          var proposedShifts = 0;
+          var freqDays = 1;
+          if (freqRaw.indexOf('weekly') >= 0 && freqRaw.indexOf('2') >= 0) freqDays = 14;
+          else if (freqRaw.indexOf('weekly') >= 0 && freqRaw.indexOf('4') >= 0) freqDays = 28;
+          else if (freqRaw.indexOf('weekly') >= 0) freqDays = 7;
+          if (endsDateInput && endsDateInput.value) {
+            var endD = new Date(endsDateInput.value);
+            if (!isNaN(endD.getTime())) {
+              suffix = freq + ', End ' + (endD.getMonth() + 1) + '/' + endD.getDate();
+              if (dateVal) {
+                var startD = new Date(dateVal);
+                if (!isNaN(startD.getTime())) {
+                  startD.setHours(0,0,0,0); endD.setHours(0,0,0,0);
+                  var ms = endD - startD;
+                  proposedShifts = Math.max(1, Math.floor(ms / (freqDays * 24 * 60 * 60 * 1000)) + 1);
+                  suffix += ' · ' + proposedShifts + ' shifts';
+                }
+              }
+            }
+          } else if (shiftsInput && shiftsInput.value) {
+            suffix = freq + ', +' + shiftsInput.value + ' Shifts';
+          } else {
+            suffix = freq;
+          }
+          base = base + '<br>(' + suffix + ')';
+        }
+        dateSpan.innerHTML = base;
+
+        var calCard = document.querySelector('.calendar-card');
+        if (calCard) {
+          calCard.querySelectorAll('.calendar-day').forEach(function(c) { c.classList.remove('selected'); });
+          if (dateVal) {
+            var d = new Date(dateVal);
+            if (!isNaN(d.getTime())) {
+              var ymd = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+              var m = calCard.querySelector('.calendar-day[data-date="' + ymd + '"]');
+              if (m) m.classList.add('selected');
+            }
+          }
+        }
+
+        var sh = parseInt(startBlock.querySelector('.form-select-hour').value, 10);
+        var sm = startBlock.querySelector('.form-select-min').value;
+        var sampm = startBlock.querySelector('.form-select-ampm').value;
+        var eh = parseInt(endBlock.querySelector('.form-select-hour').value, 10);
+        var em = endBlock.querySelector('.form-select-min').value;
+        var eampm = endBlock.querySelector('.form-select-ampm').value;
+
+        var timeParts = [];
+        var hours = 0;
+        if (!isNaN(sh) && startBlock.querySelector('.form-select-hour').value) {
+          var startStr = sh + ':' + (sm || '00') + sampm.toLowerCase();
+          if (!isNaN(eh) && endBlock.querySelector('.form-select-hour').value) {
+            var endStr = eh + ':' + (em || '00') + eampm.toLowerCase();
+            timeParts.push(startStr + '-' + endStr);
+            hours = Math.max(0, toHour24(eh, eampm) - toHour24(sh, sampm));
+          } else {
+            timeParts.push(startStr);
+          }
+        }
+        var activePill = document.querySelector('.flex-pill.active');
+        if (activePill) timeParts.push(activePill.textContent.trim());
+        if (hours > 0) timeParts.push(hours + 'hrs');
+
+        timeSpan.textContent = timeParts.length ? timeParts.join(' · ') : 'CDT US/Central';
+      }
+
+      document.getElementById('location-select').addEventListener('change', updateSummaryPanel);
+      document.querySelectorAll('.start-block .form-select-hour, .start-block .form-select-ampm, .end-block .form-select-hour, .end-block .form-select-ampm').forEach(function(sel) {
+        sel.addEventListener('change', function() { updateSummaryPanel(); updateDatetimeSummary(); });
+      });
+      var repeatSelEl = document.getElementById('repeat-select');
+      if (repeatSelEl) repeatSelEl.addEventListener('change', function() { updateDatetimeSummary(); updateSummaryPanel(); });
+      var shiftsCountEl = document.getElementById('shifts-count-input');
+      if (shiftsCountEl) {
+        function onShiftsChange() {
+          if (shiftsCountEl.value) {
+            var endsDate = document.getElementById('ends-date-input');
+            if (endsDate && endsDate._flatpickr) endsDate._flatpickr.clear();
+          }
+          updateDatetimeSummary(); updateSummaryPanel();
+        }
+        shiftsCountEl.addEventListener('input', onShiftsChange);
+        shiftsCountEl.addEventListener('change', onShiftsChange);
+      }
+      updateSummaryPanel();
+      updateDatetimeSummary();
+
+      // Auto-set AM/PM and mins on hour selection, then refresh summary with correct values
+      startBlock.querySelector('.form-select-hour').addEventListener('change', function() {
+        var h = parseInt(this.value, 10);
+        if (!isNaN(h)) {
+          startBlock.querySelector('.form-select-min').value = '00';
+          startBlock.querySelector('.form-select-ampm').value = (h >= 7 && h <= 11) ? 'AM' : 'PM';
+        }
+        updateSummaryPanel(); updateDatetimeSummary();
+      });
+
+      endBlock.querySelector('.form-select-hour').addEventListener('change', function() {
+        var h = parseInt(this.value, 10);
+        if (!isNaN(h)) {
+          endBlock.querySelector('.form-select-min').value = '00';
+          var startAmpm = startBlock.querySelector('.form-select-ampm').value;
+          endBlock.querySelector('.form-select-ampm').value = startAmpm || 'AM';
+        }
+        updateSummaryPanel(); updateDatetimeSummary();
+      });
+
+      // Form submission → success screen
+      var formCard = document.querySelector('.form-card');
+      var successCard = document.getElementById('success-card');
+      var requestMoreBtn = document.getElementById('request-more-btn');
+
+      function fmtTime(h, m, ampm) {
+        if (isNaN(h) || !h) return '';
+        return h + ':' + (m || '00') + ampm.toLowerCase();
+      }
+
+      function fmtDate(d) {
+        var days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+        var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+        return days[d.getDay()] + ', ' + months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+      }
+
+      function getShiftDates() {
+        var dates = [];
+        var mainDateInput = document.querySelector('.form-section .date-input-wrap:not(.ends-date) .date-input') || document.querySelectorAll('.date-input')[0];
+        var dateVal = mainDateInput ? mainDateInput.value : '';
+        if (!dateVal) return [];
+        var startD = new Date(dateVal);
+        if (isNaN(startD.getTime())) return [];
+        var repeatSel = document.getElementById('repeat-select');
+        var freqDays = 1;
+        if (repeatSel && repeatSel.value && repeatSel.value !== 'Does not repeat') {
+          var freqRaw = repeatSel.options[repeatSel.selectedIndex] ? repeatSel.options[repeatSel.selectedIndex].text : repeatSel.value;
+          if (freqRaw.indexOf('weekly') >= 0 && freqRaw.indexOf('2') >= 0) freqDays = 14;
+          else if (freqRaw.indexOf('weekly') >= 0 && freqRaw.indexOf('4') >= 0) freqDays = 28;
+          else if (freqRaw.indexOf('weekly') >= 0) freqDays = 7;
+        }
+        var shiftCount = getProposedShiftCount();
+        for (var i = 0; i < shiftCount; i++) {
+          var d = new Date(startD);
+          d.setDate(d.getDate() + i * freqDays);
+          dates.push(d);
+        }
+        return dates;
+      }
+
+      document.querySelector('.submit-btn').addEventListener('click', function(e) {
+        e.preventDefault();
+
+        var locationSel = document.getElementById('location-select');
+        var locationText = locationSel.options[locationSel.selectedIndex].text;
+        var dateVal = document.querySelector('.date-input').value;
+
+        var sh = parseInt(startBlock.querySelector('.form-select-hour').value, 10);
+        var sm = startBlock.querySelector('.form-select-min').value || '00';
+        var sampm = startBlock.querySelector('.form-select-ampm').value;
+        var eh = parseInt(endBlock.querySelector('.form-select-hour').value, 10);
+        var em = endBlock.querySelector('.form-select-min').value || '00';
+        var eampm = endBlock.querySelector('.form-select-ampm').value;
+        var hours = (!isNaN(sh) && !isNaN(eh)) ? Math.max(0, toHour24(eh, eampm) - toHour24(sh, sampm)) : 0;
+
+        var selectedRoles = [];
+        document.querySelectorAll('.role-chip.checked').forEach(function(chip) {
+          selectedRoles.push({ name: chip.getAttribute('data-role'), icon: (chip.querySelector('[data-lucide]') || {}).getAttribute ? chip.querySelector('[data-lucide]').getAttribute('data-lucide') : 'briefcase' });
+        });
+
+        var shiftCount = getProposedShiftCount();
+        var flexLabel = shiftCount === 1 ? '1 Booked Flex' : shiftCount + ' Booked Flexes';
+        var totalHours = hours * shiftCount;
+        var shiftDates = getShiftDates();
+        if (shiftDates.length === 0) shiftDates = [new Date(dateVal)];
+
+        var html = '<div class="booked-flex-header">';
+        html += '<div class="booked-flex-info"><h3 class="booked-flex-title">' + flexLabel + '</h3>';
+        if (shiftCount > 1) html += '<div class="booked-flex-total-hrs"><i data-lucide="calendar-clock"></i><span>' + totalHours + ' hrs total</span></div>';
+        html += '<div class="booked-flex-location"><i data-lucide="map-pin"></i><span>' + locationText + '</span></div></div>';
+        html += '<button class="cancel-btn">Cancel</button></div>';
+
+        var timeLabel = fmtTime(sh, sm, sampm) + ' - ' + fmtTime(eh, em, eampm) + ' CST · ' + hours + ' hrs';
+        shiftDates.forEach(function(d) {
+          html += '<div class="booked-flex-shift">';
+          html += '<div class="booked-flex-date">' + fmtDate(d) + '</div>';
+          html += '<div class="booked-flex-time"><i data-lucide="clock"></i><span>' + timeLabel + '</span></div>';
+          selectedRoles.forEach(function(r) {
+            html += '<div class="booked-flex-role"><i data-lucide="' + r.icon + '"></i><span>' + r.name + '</span></div>';
+          });
+          html += '</div>';
+        });
+
+        document.getElementById('success-shifts-container').innerHTML = html;
+        formCard.style.display = 'none';
+        var rightColumn = document.getElementById('right-column');
+        if (rightColumn) rightColumn.classList.remove('visible');
+        successCard.classList.add('visible');
+        if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+      });
+
+      requestMoreBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        successCard.classList.remove('visible');
+        var rightColumn = document.getElementById('right-column');
+        if (rightColumn) rightColumn.classList.add('visible');
+        formCard.style.display = '';
+        document.querySelectorAll('.role-chip.checked').forEach(function(c) { c.classList.remove('checked'); });
+        document.querySelectorAll('.flex-pill.active').forEach(function(p) { p.classList.remove('active'); });
+        // Reset selects & date
+        startBlock.querySelector('.form-select-hour').value = '';
+        startBlock.querySelector('.form-select-min').value = '';
+        endBlock.querySelector('.form-select-hour').value = '';
+        endBlock.querySelector('.form-select-min').value = '';
+        document.querySelectorAll('.date-input').forEach(function(inp) { if (inp._flatpickr) inp._flatpickr.clear(); });
+        updateSummaryPanel(); updateDatetimeSummary(); updateRolesSummary(); updateFlexInfo(); checkFormValid();
       });
 
       // Date inputs: Flatpickr opens calendar below on click
-      var prototypeToday = '2026-03-07';
+      var today = new Date();
+      today.setHours(0, 0, 0, 0);
+      var todayStr = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0');
+      var calCard = document.querySelector('.calendar-card');
+      if (calCard) {
+        calCard.querySelectorAll('.calendar-day').forEach(function(c) { c.classList.remove('today'); });
+        var todayCell = calCard.querySelector('.calendar-day[data-date="' + todayStr + '"]');
+        if (todayCell) todayCell.classList.add('today');
+      }
       document.querySelectorAll('.date-input').forEach(function(el) {
         var wrap = el.closest('.date-input-wrap');
-        flatpickr(el, {
-          dateFormat: 'D, F j Y',
+        var isEndsDate = el.id === 'ends-date-input';
+        var fp = flatpickr(el, {
+          dateFormat: 'D, F j, Y',
+          defaultDate: null,
+          disable: [function(date) {
+            var cutoff = new Date(today);
+            cutoff.setHours(0, 0, 0, 0);
+            if (isEndsDate) {
+              var mainInput = document.querySelector('.form-section .date-input-wrap:not(.ends-date) .date-input') || document.querySelectorAll('.date-input')[0];
+              if (mainInput && mainInput.value) {
+                var mainD = new Date(mainInput.value);
+                if (!isNaN(mainD.getTime())) {
+                  mainD.setHours(0, 0, 0, 0);
+                  if (mainD > cutoff) cutoff = mainD;
+                }
+              }
+            }
+            return date < cutoff;
+          }],
           disableMobile: true,
           appendTo: wrap,
           monthSelectorType: 'static',
-          onDayCreate: function(dObj, dStr, fp, dayElem) {
-            if (dayElem && dayElem.dateObj) {
-              var dateStr = fp.formatDate(dayElem.dateObj, 'Y-m-d');
-              if (dateStr === prototypeToday) dayElem.classList.add('prototype-today');
+          onChange: function(selectedDates, dateStr, instance) {
+            if (instance.input && instance.input.id === 'ends-date-input' && selectedDates.length > 0) {
+              var si = document.getElementById('shifts-count-input');
+              if (si) si.value = '';
             }
+            if (instance.input && instance.input.id !== 'ends-date-input') {
+              var calCard = document.querySelector('.calendar-card');
+              if (calCard) {
+                calCard.querySelectorAll('.calendar-day').forEach(function(cell) { cell.classList.remove('selected'); });
+                if (selectedDates.length > 0) {
+                  var d = selectedDates[0];
+                  var ymd = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+                  var match = calCard.querySelector('.calendar-day[data-date="' + ymd + '"]');
+                  if (match) match.classList.add('selected');
+                }
+              }
+            }
+            updateDatetimeSummary(); updateSummaryPanel(); checkFormValid();
           },
           onReady: function(selectedDates, dateStr, fp) {
             var cal = fp.calendarContainer;
@@ -977,7 +1454,7 @@
               var link = document.createElement('div');
               link.className = 'flatpickr-goto-today';
               link.textContent = 'Go to today';
-              link.addEventListener('click', function() { fp.jumpToDate(new Date(2026, 2, 7)); });
+              link.addEventListener('click', function() { fp.jumpToDate(today); });
               cal.appendChild(link);
             }
           }

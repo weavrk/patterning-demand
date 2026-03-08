@@ -309,6 +309,7 @@
     .add-shift-btn { display: inline-flex; align-items: center; justify-content: center; padding: 6px 16px; height: 32px; background: var(--main-white); border: 1px solid var(--gray-100); border-radius: var(--radius-lg); font-size: 14px; font-weight: 500; color: var(--app-primary); cursor: pointer; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 1; }
     .add-shift-btn:hover { background: var(--gray-50); }
     .submit-btn { padding: 12px 24px; background: var(--stone-700); color: var(--main-white); border: none; border-radius: 8px; font-size: 16px; font-weight: 500; cursor: pointer; display: block; margin: 0 auto; }
+    .submit-btn:disabled { opacity: 0.4; cursor: not-allowed; }
     .submit-summary { text-align: center; font-size: 14px; color: var(--text-hint); margin-top: 8px; }
 
     /* Tabs */
@@ -513,14 +514,16 @@
     /* RequestWorkerCalendar */
     .calendar-card { margin-top: 0; }
     .calendar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-    .calendar-month { font-size: 20px; font-weight: 600; }
-    .calendar-nav-btn { width: 28px; height: 28px; border: 1px solid var(--black-alpha-200); border-radius: 50%; background: var(--main-white); cursor: pointer; font-size: 14px; }
+    .calendar-month { font-size: 20px; color: #18181B; display: flex; align-items: center; gap: 4px; }
+    .calendar-month .cal-month-name { font-weight: 600; }
+    .calendar-month .cal-month-year { font-weight: 400; }
+    .calendar-nav-btn { width: 28px; height: 28px; border: 1px solid var(--black-alpha-200); border-radius: 50%; background: var(--main-white); cursor: pointer; font-size: 14px; display: inline-flex; align-items: center; justify-content: center; line-height: 1; }
     .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; font-size: 14px; }
     .calendar-dow { text-align: center; color: var(--text-hint); padding: 4px 0; font-size: 14px; }
     .calendar-day { text-align: center; padding: 6px; border-radius: 6px; cursor: pointer; color: var(--text-primary); font-weight: 500; }
     .calendar-day:hover { background: var(--black-alpha-100); }
-    .calendar-day.selected { background: var(--main-dark); color: #fff; }
-    .calendar-day.today { border: 1px solid var(--black-alpha-200); font-weight: 600; }
+    .calendar-day.selected { background: var(--app-primary); color: #fff; border-radius: 50%; width: 30px; height: 30px; padding: 0; display: flex; align-items: center; justify-content: center; margin: 0 auto; }
+    .calendar-day.today { background: var(--gray-100); color: var(--app-primary); border-radius: 50%; width: 30px; height: 30px; padding: 0; display: flex; align-items: center; justify-content: center; margin: 0 auto; font-weight: 600; }
     .schedule-section { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--black-alpha-200); }
     .schedule-title { font-size: 14px; font-weight: 500; color: var(--app-secondary); margin-bottom: 12px; }
     .schedule-item { display: flex; align-items: center; gap: 6px; padding: 8px 0; font-size: 14px; color: var(--text-primary); }
@@ -555,7 +558,7 @@
       font-size: 12px;
     }
     .variant-link:hover {
-      background: var(--black-alpha-100);
+      background: none;
       color: var(--app-primary);
     }
     .variant-link.active {
@@ -655,9 +658,9 @@
               <div class="form-row-item">
                 <label class="form-label-sm">Date</label>
                 <select class="form-select">
-                  <option>Today, Mar 2</option>
-                  <option>Mon, Mar 3</option>
-                  <option>Tue, Mar 4</option>
+                  <option>Today, Mar 7</option>
+                  <option>Sun, Mar 8</option>
+                  <option>Mon, Mar 9</option>
                 </select>
               </div>
               <div class="form-row-item">
@@ -731,7 +734,7 @@
                 <div class="role-category-label">Special Event</div>
                 <div class="role-chips">
                   <button type="button" class="role-chip" data-role="Warehouse Sale"><i data-lucide="package" class="chip-icon"></i>Warehouse Sale</button>
-                  <button type="button" class="role-chip checked" data-role="Event Help"><i data-lucide="sparkles" class="chip-icon"></i>Event Help</button>
+                  <button type="button" class="role-chip" data-role="Event Help"><i data-lucide="sparkles" class="chip-icon"></i>Event Help</button>
                   <button type="button" class="role-chip" data-role="NSO Support"><i data-lucide="target" class="chip-icon"></i>NSO Support</button>
                 </div>
               </div>
@@ -742,7 +745,7 @@
             <div class="add-additional-row">
               <button class="add-shift-btn"><i data-lucide="plus" style="width:20px;height:20px;margin-right:6px"></i>Add Additional</button>
             </div>
-            <button class="submit-btn">Submit Request</button>
+            <button class="submit-btn" id="submit-btn-single" disabled>Submit Request</button>
             <p class="submit-summary">1 Flex, 3 hours</p>
           </div>
           </div>
@@ -787,9 +790,9 @@
                 <div class="form-row-item">
                   <label class="form-label-sm">Date</label>
                   <select class="form-select">
-                    <option>Today, Mar 2</option>
-                    <option>Mon, Mar 3</option>
-                    <option>Tue, Mar 4</option>
+                    <option>Today, Mar 7</option>
+                    <option>Sun, Mar 8</option>
+                    <option>Mon, Mar 9</option>
                   </select>
                 </div>
               </div>
@@ -833,7 +836,7 @@
             </div>
 
             <div class="form-divider">
-              <button class="submit-btn">Submit Request</button>
+              <button class="submit-btn" id="submit-btn-repeat" disabled>Submit Request</button>
               <p class="submit-summary">Repeating shift</p>
             </div>
           </div>
@@ -844,11 +847,12 @@
         <aside id="right-column" class="right-column visible">
           <div class="summary-card">
             <h2 class="summary-title">Request Summary</h2>
-            <div class="summary-row"><i data-lucide="map-pin" class="summary-icon"></i> Galleria - Houston</div>
+            <div class="summary-row"><i data-lucide="map-pin" class="summary-icon"></i> <span id="summary-location-text">Galleria - Houston</span></div>
             <div class="summary-row"><i data-lucide="clock" class="summary-icon"></i> CDT US/Central</div>
+            <div class="summary-row" id="summary-roles-row" style="display:none;"><i data-lucide="briefcase" class="summary-icon"></i> <span id="summary-roles-text"></span></div>
             <div class="budget-section">
               <div class="budget-label">Budget Impact</div>
-              <div class="budget-row"><span>Mar '25</span><span>Requesting 4h</span></div>
+              <div class="budget-row"><span>Mar '26</span><span id="summary-requesting">Requesting 0h</span></div>
               <div class="budget-bar"><div class="budget-fill"></div><div class="budget-requested"></div></div>
               <div class="budget-row" style="margin-top:4px;"><span></span><span class="budget-hours">250h</span></div>
             </div>
@@ -856,7 +860,7 @@
 
           <div class="summary-card calendar-card">
             <div class="calendar-header">
-              <span class="calendar-month">March 2025</span>
+              <span class="calendar-month"><span class="cal-month-name">March</span><span class="cal-month-year">2026</span></span>
               <div>
                 <button class="calendar-nav-btn">‹</button>
                 <button class="calendar-nav-btn">›</button>
@@ -864,12 +868,11 @@
             </div>
             <div class="calendar-grid">
               <div class="calendar-dow">Sun</div><div class="calendar-dow">Mon</div><div class="calendar-dow">Tue</div><div class="calendar-dow">Wed</div><div class="calendar-dow">Thu</div><div class="calendar-dow">Fri</div><div class="calendar-dow">Sat</div>
-              <div class="calendar-day"></div><div class="calendar-day"></div><div class="calendar-day"></div><div class="calendar-day"></div><div class="calendar-day"></div><div class="calendar-day">1</div><div class="calendar-day">2</div>
-              <div class="calendar-day selected">3</div><div class="calendar-day">4</div><div class="calendar-day">5</div><div class="calendar-day">6</div><div class="calendar-day">7</div><div class="calendar-day">8</div><div class="calendar-day">9</div>
-              <div class="calendar-day">10</div><div class="calendar-day">11</div><div class="calendar-day">12</div><div class="calendar-day">13</div><div class="calendar-day">14</div><div class="calendar-day">15</div><div class="calendar-day">16</div>
-              <div class="calendar-day">17</div><div class="calendar-day">18</div><div class="calendar-day">19</div><div class="calendar-day">20</div><div class="calendar-day">21</div><div class="calendar-day">22</div><div class="calendar-day">23</div>
-              <div class="calendar-day">24</div><div class="calendar-day">25</div><div class="calendar-day">26</div><div class="calendar-day">27</div><div class="calendar-day">28</div><div class="calendar-day">29</div><div class="calendar-day">30</div>
-              <div class="calendar-day">31</div>
+              <div class="calendar-day">1</div><div class="calendar-day">2</div><div class="calendar-day selected">3</div><div class="calendar-day">4</div><div class="calendar-day">5</div><div class="calendar-day">6</div><div class="calendar-day today">7</div>
+              <div class="calendar-day">8</div><div class="calendar-day">9</div><div class="calendar-day">10</div><div class="calendar-day">11</div><div class="calendar-day">12</div><div class="calendar-day">13</div><div class="calendar-day">14</div>
+              <div class="calendar-day">15</div><div class="calendar-day">16</div><div class="calendar-day">17</div><div class="calendar-day">18</div><div class="calendar-day">19</div><div class="calendar-day">20</div><div class="calendar-day">21</div>
+              <div class="calendar-day">22</div><div class="calendar-day">23</div><div class="calendar-day">24</div><div class="calendar-day">25</div><div class="calendar-day">26</div><div class="calendar-day">27</div><div class="calendar-day">28</div>
+              <div class="calendar-day">29</div><div class="calendar-day">30</div><div class="calendar-day">31</div><div class="calendar-day"></div><div class="calendar-day"></div><div class="calendar-day"></div><div class="calendar-day"></div>
             </div>
             <div class="schedule-section">
               <div class="schedule-title">1 Shift on Mar 3rd</div>
@@ -915,9 +918,80 @@
         switchRow.addEventListener('keydown', function(e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleSwitch(); } });
       }
 
+      function checkFormValid() {
+        var locationOk = (document.getElementById('location-select').value !== '');
+        var chipsOk = document.querySelectorAll('.role-chip.checked').length > 0;
+        var valid = locationOk && chipsOk;
+        document.getElementById('submit-btn-single').disabled = !valid;
+        document.getElementById('submit-btn-repeat').disabled = !valid;
+      }
+
+      function updateRolesSummary() {
+        var checked = document.querySelectorAll('.role-chip.checked');
+        var rolesRow = document.getElementById('summary-roles-row');
+        var rolesText = document.getElementById('summary-roles-text');
+        if (checked.length > 0) {
+          var names = Array.from(checked).map(function(c) { return c.getAttribute('data-role'); }).join(', ');
+          rolesText.textContent = names;
+          rolesRow.style.display = '';
+        } else {
+          rolesRow.style.display = 'none';
+        }
+      }
+
       document.querySelectorAll('.role-chip').forEach(function(btn) {
-        btn.addEventListener('click', function() { this.classList.toggle('checked'); });
+        btn.addEventListener('click', function() { this.classList.toggle('checked'); checkFormValid(); updateRolesSummary(); });
       });
+
+      document.getElementById('location-select').addEventListener('change', checkFormValid);
+
+      checkFormValid();
+
+      // Summary panel helpers
+      function toHour24(h, ampm) {
+        if (ampm === 'PM' && h !== 12) return h + 12;
+        if (ampm === 'AM' && h === 12) return 0;
+        return h;
+      }
+
+      function updateSummaryPanel() {
+        var locationSel = document.getElementById('location-select');
+        var locationText = locationSel.options[locationSel.selectedIndex] ? locationSel.options[locationSel.selectedIndex].text : '';
+        var locSpan = document.getElementById('summary-location-text');
+        if (locSpan) locSpan.textContent = locationText || 'Choose Location';
+
+        // Parse time from single-tab start/end groups
+        var singleTab = document.getElementById('single-tab');
+        var hours = 0;
+        if (singleTab) {
+          var timeGroups = singleTab.querySelectorAll('.start-end-time-group');
+          if (timeGroups.length >= 2) {
+            var startVal = timeGroups[0].querySelector('select:not(.form-select-ampm)').value;
+            var startAmpm = timeGroups[0].querySelector('.form-select-ampm') ? timeGroups[0].querySelector('.form-select-ampm').value : 'AM';
+            var endVal = timeGroups[1].querySelector('select:not(.form-select-ampm)').value;
+            var endAmpm = timeGroups[1].querySelector('.form-select-ampm') ? timeGroups[1].querySelector('.form-select-ampm').value : 'AM';
+            var sh = parseFloat(startVal);
+            var eh = parseFloat(endVal);
+            if (!isNaN(sh) && !isNaN(eh)) {
+              var s24 = toHour24(sh, startAmpm);
+              var e24 = toHour24(eh, endAmpm);
+              hours = Math.max(0, e24 - s24);
+            }
+          }
+        }
+
+        var reqSpan = document.getElementById('summary-requesting');
+        if (reqSpan) reqSpan.textContent = 'Requesting ' + hours + 'h';
+
+        var budgetReq = document.querySelector('.budget-requested');
+        if (budgetReq) budgetReq.style.width = Math.min(45, hours * 3) + '%';
+      }
+
+      document.getElementById('location-select').addEventListener('change', updateSummaryPanel);
+      document.querySelectorAll('.start-end-time-group select').forEach(function(sel) {
+        sel.addEventListener('change', updateSummaryPanel);
+      });
+      updateSummaryPanel();
 
       document.querySelectorAll('.tab-button').forEach(function(btn) {
         btn.addEventListener('click', function() {

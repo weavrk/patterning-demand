@@ -262,8 +262,8 @@
     .form-question { margin-bottom: 24px; }
     .form-question.form-question-row { display: flex; align-items: center; gap: 12px; }
     .form-question.form-question-row .form-label { margin-bottom: 0; }
-    .form-label { display: block; font-weight: 500; color: var(--app-primary); margin-bottom: 4px; font-size: 16px; }
-    .form-label-sm { font-size: 14px; font-weight: 400; color: var(--app-secondary); margin-bottom: 4px; }
+    .form-label { display: block; font-weight: 500; color: var(--text-primary); margin-bottom: 4px; font-size: 16px; }
+    .form-label-sm { font-size: 14px; font-weight: 400; color: var(--text-hint); margin-bottom: 4px; }
     .form-select, .form-input {
       padding: 8px 12px;
       border: 1px solid var(--black-alpha-200);
@@ -273,6 +273,7 @@
       background: var(--main-white);
       height: 40px;
     }
+    .form-select:disabled { cursor: not-allowed; pointer-events: none; }
     .form-select {
       min-width: 120px;
       padding-right: 36px;
@@ -284,14 +285,14 @@
       background-position: right 10px center;
     }
     .form-select option[value=""] {
-      color: var(--app-secondary);
+      color: var(--text-hint);
     }
     .form-select.placeholder {
-      color: var(--app-secondary);
+      color: var(--text-hint);
     }
     .form-input::placeholder,
     .form-select::placeholder {
-      color: var(--app-secondary);
+      color: var(--text-hint);
     }
     .form-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-end; }
     .form-row.location-people-row { gap: 16px; }
@@ -315,24 +316,24 @@
     .remove-shift-btn:hover { color: var(--app-primary); }
     .add-additional-row { position: relative; width: 100%; margin-bottom: 32px; min-height: 40px; }
     .add-additional-row::after { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: var(--black-alpha-200); z-index: 0; }
-    .add-shift-btn { display: inline-flex; align-items: center; justify-content: center; padding: 6px 16px; height: 32px; background: var(--main-white); border: 1px solid var(--gray-100); border-radius: var(--radius-lg); font-size: 16px; font-weight: 500; color: var(--app-primary); cursor: pointer; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 1; }
+    .add-shift-btn { display: inline-flex; align-items: center; justify-content: center; padding: 4px 12px; height: 32px; background: var(--main-white); border: 1px solid var(--gray-100); border-radius: var(--radius-lg); font-size: 14px; font-weight: 500; color: var(--app-primary); cursor: pointer; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 1; }
     .add-shift-btn:hover { background: var(--gray-50); }
     .submit-btn { padding: 12px 24px; background: var(--stone-700); color: var(--main-white); border: none; border-radius: 8px; font-size: 16px; font-weight: 500; cursor: pointer; display: block; margin: 0 auto; }
+    .submit-btn:disabled { opacity: 0.4; cursor: not-allowed; }
     .submit-summary { text-align: center; font-size: 16px; color: var(--text-hint); margin-top: 8px; }
 
     /* QuestionRoles - role checkboxes */
     .roles-section { margin-top: 8px; }
     .role-category { margin-bottom: 24px; }
-    .role-category-label { font-size: 14px; color: var(--app-secondary); margin-bottom: 12px; }
-    .role-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .role-category-label { font-size: 14px; color: var(--text-hint); margin-bottom: 12px; }
+    .role-chips { display: flex; flex-wrap: wrap; gap: 4px; }
     .role-chip {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 0 12px; border-radius: 8px;
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 2px 8px; border-radius: 6px;
       border: 1px solid var(--black-alpha-200);
       background: var(--main-white);
-      font-size: 16px; font-weight: 400; color: var(--text-primary);
+      font-size: 16px; font-weight: 500; color: rgba(0,0,0,0.48);
       cursor: pointer; transition: all 0.15s;
-      height: 32px;
     }
     .role-chip:hover { border-color: var(--green-100); background: var(--green-100); color: var(--green-600); }
     .role-chip.checked { border-color: var(--green-200); background: var(--green-100); color: var(--green-600); }
@@ -375,21 +376,23 @@
     /* RequestWorkerCalendar */
     .calendar-card { margin-top: 0; }
     .calendar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-    .calendar-month { font-size: 20px; font-weight: 600; }
-    .calendar-nav-btn { width: 28px; height: 28px; border: 1px solid var(--black-alpha-200); border-radius: 50%; background: var(--main-white); cursor: pointer; font-size: 14px; }
-    .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; font-size: 14px; }
-    .calendar-dow { text-align: center; color: var(--text-hint); padding: 4px 0; font-size: 14px; }
-    .calendar-day { text-align: center; padding: 6px; border-radius: 6px; cursor: pointer; color: var(--text-primary); font-weight: 500; }
-    .calendar-day:hover { background: var(--black-alpha-100); }
-    .calendar-day.selected { background: var(--main-dark); color: #fff; }
-    .calendar-day.today { border: 1px solid var(--black-alpha-200); font-weight: 600; }
+    .calendar-month { font-size: 16px; font-weight: 600; color: #616161; }
+    .calendar-nav-btn { background: none; border: none; color: #A5A5A5; cursor: pointer; font-size: 18px; padding: 4px 8px; line-height: 1; }
+    .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; font-size: 16px; }
+    .calendar-dow { text-align: center; color: #A5A5A5; padding: 6px 0; font-size: 13px; }
+    .calendar-day { text-align: center; padding: 8px 4px; border-radius: 4px; cursor: pointer; color: #616161; font-weight: 600; }
+    .calendar-day:hover { background: #F4F4F5; }
+    .calendar-day.selected { background: #3F3F46; color: #fff; border-radius: 4px; }
+    .calendar-day.today { background: #D4D4D8; color: #3F3F46; font-weight: 600; border-radius: 4px; }
+    .calendar-day.past { color: #EBEBEB; font-weight: 400; cursor: default; }
+    .calendar-day.outside { color: #A5A5A5; font-weight: 400; }
     .schedule-section { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--black-alpha-200); }
-    .schedule-title { font-size: 14px; font-weight: 500; color: var(--app-secondary); margin-bottom: 12px; }
+    .schedule-title { font-size: 14px; font-weight: 500; color: var(--gray-600); margin-bottom: 12px; }
     .schedule-item { display: flex; align-items: center; gap: 6px; padding: 8px 0; font-size: 14px; color: var(--text-primary); }
     .schedule-item .schedule-time-wrap { display: flex; align-items: center; gap: 6px; flex-grow: 1; }
     .schedule-item .schedule-time-wrap .lucide { width: 16px; height: 16px; flex-shrink: 0; color: var(--text-hint); }
     .schedule-time { font-weight: 500; }
-    .schedule-badge { font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: 6px; background: var(--navy-100); color: var(--app-primary); }
+    .schedule-badge { font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: 6px; background: var(--navy-100); color: var(--text-primary); }
 
     /* Success screen */
     .success-card {
@@ -579,6 +582,7 @@
       font-size: 12px;
     }
     .variant-link:hover {
+      background: none;
       color: var(--app-primary);
     }
     .variant-link.active {
@@ -656,27 +660,13 @@
         <!-- RequestWorkerForm -->
         <section class="form-card">
           <div class="form-question">
-            <div class="form-row location-people-row">
-              <div class="form-row-item">
-                <label class="form-label">Location</label>
-                <select id="location-select" class="form-select" style="width:100%;">
-                  <option value="">Choose Location</option>
-                  <option value="galleria" selected>Galleria - Houston</option>
-                  <option value="downtown">Downtown - Austin</option>
-                  <option value="midtown">Midtown - Dallas</option>
-                </select>
-              </div>
-              <div class="form-row-item">
-                <label class="form-label">Number of People</label>
-                <select class="form-select" style="width:100px;">
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                </select>
-              </div>
-            </div>
+            <label class="form-label">Location</label>
+            <select id="location-select" class="form-select" style="width:100%;">
+              <option value="">Choose Location</option>
+              <option value="galleria">Galleria - Houston</option>
+              <option value="downtown">Downtown - Austin</option>
+              <option value="midtown">Midtown - Dallas</option>
+            </select>
           </div>
 
           <div id="shifts-container">
@@ -686,15 +676,17 @@
             <div class="form-row">
               <div class="form-row-item">
                 <label class="form-label-sm">Date</label>
-                <select class="form-select">
-                  <option>Today, Mar 2</option>
-                  <option>Mon, Mar 3</option>
-                  <option>Tue, Mar 4</option>
+                <select class="form-select shift-select" disabled>
+                  <option value="">Date</option>
+                  <option>Today, Mar 7</option>
+                  <option>Sun, Mar 8</option>
+                  <option>Mon, Mar 9</option>
                 </select>
               </div>
               <div class="form-row-item">
                 <label class="form-label-sm">Start (CDT)</label>
-                <select class="form-select">
+                <select class="form-select shift-select" disabled>
+                  <option value="">Start</option>
                   <option>10:00am</option>
                   <option>11:00am</option>
                   <option>12:00pm</option>
@@ -702,7 +694,8 @@
               </div>
               <div class="form-row-item">
                 <label class="form-label-sm">End</label>
-                <select class="form-select">
+                <select class="form-select shift-select" disabled>
+                  <option value="">End</option>
                   <option>1:00pm</option>
                   <option>2:00pm</option>
                   <option>3:00pm</option>
@@ -716,6 +709,17 @@
             </label>
           </div>
 
+          <div class="form-question" style="display:flex; align-items:center; gap:16px;">
+            <label class="form-label" style="margin:0; white-space:nowrap;">Number of People</label>
+            <select class="form-select" style="width:100px;">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
+          </div>
+
           <div class="form-question">
             <label class="form-label">Where Do You Need Help?</label>
             <div class="roles-section">
@@ -724,7 +728,7 @@
                 <div class="role-chips">
                   <button type="button" class="role-chip" data-role="Sales Associate"><i data-lucide="shopping-bag" class="chip-icon"></i>Sales Associate</button>
                   <button type="button" class="role-chip" data-role="Cashier"><i data-lucide="credit-card" class="chip-icon"></i>Cashier</button>
-                  <button type="button" class="role-chip checked" data-role="Event Help"><i data-lucide="sparkles" class="chip-icon"></i>Event Help</button>
+                  <button type="button" class="role-chip" data-role="Event Help"><i data-lucide="sparkles" class="chip-icon"></i>Event Help</button>
                   <button type="button" class="role-chip" data-role="Fitting Rooms"><i data-lucide="shirt" class="chip-icon"></i>Fitting Rooms</button>
                   <button type="button" class="role-chip" data-role="Floor Organization"><i data-lucide="layout-grid" class="chip-icon"></i>Floor Organization</button>
                   <button type="button" class="role-chip" data-role="Greeter"><i data-lucide="smile" class="chip-icon"></i>Greeter</button>
@@ -753,9 +757,9 @@
 
           <div class="form-divider">
             <div class="add-additional-row">
-              <button class="add-shift-btn"><i data-lucide="plus" style="width:20px;height:20px;margin-right:6px"></i>Add Additional</button>
+              <button class="add-shift-btn"><i data-lucide="plus" style="width:16px;height:16px;margin-right:8px"></i>Add Additional</button>
             </div>
-            <button class="submit-btn">Submit Request</button>
+            <button class="submit-btn" disabled>Submit Request</button>
             <p class="submit-summary">1 Flex, 3 hours</p>
           </div>
         </section>
@@ -781,7 +785,7 @@
         </section>
 
         <!-- Right column: RequestSummary + RequestWorkerCalendar (visible when location selected) -->
-        <aside id="right-column" class="right-column visible">
+        <aside id="right-column" class="right-column">
           <div class="summary-card">
             <h2 class="summary-title">Request Summary</h2>
             <div class="summary-row"><i data-lucide="map-pin" class="summary-icon"></i> Galleria - Houston</div>
@@ -796,30 +800,21 @@
 
           <div class="summary-card calendar-card">
             <div class="calendar-header">
-              <span class="calendar-month">March 2025</span>
-              <div>
-                <button class="calendar-nav-btn">‹</button>
-                <button class="calendar-nav-btn">›</button>
-              </div>
+              <button class="calendar-nav-btn">&lt;</button>
+              <span class="calendar-month">March, 2026</span>
+              <button class="calendar-nav-btn">&gt;</button>
             </div>
             <div class="calendar-grid">
               <div class="calendar-dow">Sun</div><div class="calendar-dow">Mon</div><div class="calendar-dow">Tue</div><div class="calendar-dow">Wed</div><div class="calendar-dow">Thu</div><div class="calendar-dow">Fri</div><div class="calendar-dow">Sat</div>
-              <div class="calendar-day"></div><div class="calendar-day"></div><div class="calendar-day"></div><div class="calendar-day"></div><div class="calendar-day"></div><div class="calendar-day">1</div><div class="calendar-day">2</div>
-              <div class="calendar-day selected">3</div><div class="calendar-day">4</div><div class="calendar-day">5</div><div class="calendar-day">6</div><div class="calendar-day">7</div><div class="calendar-day">8</div><div class="calendar-day">9</div>
-              <div class="calendar-day">10</div><div class="calendar-day">11</div><div class="calendar-day">12</div><div class="calendar-day">13</div><div class="calendar-day">14</div><div class="calendar-day">15</div><div class="calendar-day">16</div>
-              <div class="calendar-day">17</div><div class="calendar-day">18</div><div class="calendar-day">19</div><div class="calendar-day">20</div><div class="calendar-day">21</div><div class="calendar-day">22</div><div class="calendar-day">23</div>
-              <div class="calendar-day">24</div><div class="calendar-day">25</div><div class="calendar-day">26</div><div class="calendar-day">27</div><div class="calendar-day">28</div><div class="calendar-day">29</div><div class="calendar-day">30</div>
-              <div class="calendar-day">31</div>
+              <div class="calendar-day past">1</div><div class="calendar-day past">2</div><div class="calendar-day past">3</div><div class="calendar-day past">4</div><div class="calendar-day past">5</div><div class="calendar-day past">6</div><div class="calendar-day today">7</div>
+              <div class="calendar-day">8</div><div class="calendar-day">9</div><div class="calendar-day">10</div><div class="calendar-day">11</div><div class="calendar-day">12</div><div class="calendar-day">13</div><div class="calendar-day">14</div>
+              <div class="calendar-day">15</div><div class="calendar-day">16</div><div class="calendar-day">17</div><div class="calendar-day">18</div><div class="calendar-day">19</div><div class="calendar-day">20</div><div class="calendar-day">21</div>
+              <div class="calendar-day">22</div><div class="calendar-day">23</div><div class="calendar-day">24</div><div class="calendar-day">25</div><div class="calendar-day">26</div><div class="calendar-day">27</div><div class="calendar-day">28</div>
+              <div class="calendar-day">29</div><div class="calendar-day">30</div><div class="calendar-day">31</div><div class="calendar-day outside">1</div><div class="calendar-day outside">2</div><div class="calendar-day outside">3</div><div class="calendar-day outside">4</div>
             </div>
             <div class="schedule-section">
-              <div class="schedule-title">1 Shift on Mar 3rd</div>
-              <div class="schedule-item">
-                <div class="schedule-time-wrap">
-                  <i data-lucide="calendar" aria-hidden="true"></i>
-                  <span class="schedule-time">3/3 · 10am-5:30pm</span>
-                </div>
-                <span class="schedule-badge">Finding Reflexer</span>
-              </div>
+              <div class="schedule-title">0 Shifts on Mar 7th</div>
+              <div style="font-size:14px; color:#A5A5A5; font-style:italic;">Ready to book a flex?</div>
             </div>
           </div>
         </aside>
@@ -847,7 +842,11 @@
 
       var sel = document.getElementById('location-select');
       var col = document.getElementById('right-column');
-      function updateCol() { col.classList.toggle('visible', !!sel.value); }
+      function updateCol() {
+        var hasLocation = !!sel.value;
+        col.classList.toggle('visible', hasLocation);
+        document.querySelectorAll('.shift-select').forEach(function(s) { s.disabled = !hasLocation; });
+      }
       sel.addEventListener('change', updateCol);
       updateCol();
 
@@ -859,9 +858,28 @@
         switchRow.addEventListener('keydown', function(e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleSwitch(); } });
       }
 
+      function checkFormValid() {
+        var locationOk = (document.getElementById('location-select').value !== '');
+        var chipsOk = document.querySelectorAll('.role-chip.checked').length > 0;
+        var shiftsOk = true;
+        document.querySelectorAll('.shift-section').forEach(function(section) {
+          var selects = section.querySelectorAll('.form-select');
+          if (!selects[0] || !selects[0].value) shiftsOk = false;
+          if (!selects[1] || !selects[1].value) shiftsOk = false;
+          if (!selects[2] || !selects[2].value) shiftsOk = false;
+        });
+        var btn = document.querySelector('.submit-btn');
+        btn.disabled = !(locationOk && chipsOk && shiftsOk);
+      }
+
       document.querySelectorAll('.role-chip').forEach(function(btn) {
-        btn.addEventListener('click', function() { this.classList.toggle('checked'); });
+        btn.addEventListener('click', function() { this.classList.toggle('checked'); checkFormValid(); });
       });
+
+      document.getElementById('location-select').addEventListener('change', checkFormValid);
+      document.addEventListener('change', function(e) { if (e.target.matches('.form-select')) checkFormValid(); });
+
+      checkFormValid();
 
       // Shift management
       var shiftsContainer = document.getElementById('shifts-container');

@@ -315,6 +315,7 @@
     .add-shift-btn { display: inline-flex; align-items: center; justify-content: center; padding: 6px 16px; height: 32px; background: var(--main-white); border: 1px solid var(--gray-100); border-radius: var(--radius-lg); font-size: 16px; font-weight: 500; color: var(--app-primary); cursor: pointer; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 1; }
     .add-shift-btn:hover { background: var(--gray-50); }
     .submit-btn { padding: 12px 24px; background: var(--stone-700); color: var(--main-white); border: none; border-radius: 8px; font-size: 16px; font-weight: 500; cursor: pointer; display: block; margin: 0 auto; }
+    .submit-btn:disabled { opacity: 0.4; cursor: not-allowed; }
     .submit-summary { text-align: center; font-size: 16px; color: var(--text-hint); margin-top: 8px; }
 
     /* QuestionRoles - role checkboxes */
@@ -372,8 +373,10 @@
     /* RequestWorkerCalendar */
     .calendar-card { margin-top: 0; }
     .calendar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-    .calendar-month { font-size: 20px; font-weight: 600; }
-    .calendar-nav-btn { width: 28px; height: 28px; border: 1px solid var(--black-alpha-200); border-radius: 50%; background: var(--main-white); cursor: pointer; font-size: 14px; }
+    .calendar-month { font-size: 20px; color: #18181B; display: flex; align-items: center; gap: 4px; }
+    .calendar-month .cal-month-name { font-weight: 600; }
+    .calendar-month .cal-month-year { font-weight: 400; }
+    .calendar-nav-btn { width: 28px; height: 28px; border: 1px solid var(--black-alpha-200); border-radius: 50%; background: var(--main-white); cursor: pointer; font-size: 14px; display: inline-flex; align-items: center; justify-content: center; line-height: 1; }
     .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; font-size: 14px; }
     .calendar-dow { text-align: center; color: var(--text-hint); padding: 4px 0; font-size: 14px; }
     .calendar-day {
@@ -386,16 +389,9 @@
       position: relative;
     }
     .calendar-day:hover { background: var(--black-alpha-100); }
-    .calendar-day.selected { background: var(--main-dark); color: #fff; }
-    .calendar-day.today {
-      background: var(--main-dark);
-      color: var(--main-white);
-      font-weight: 600;
-    }
-    .calendar-day.today:hover {
-      background: var(--stone-700);
-      color: var(--main-white);
-    }
+    .calendar-day.selected { background: var(--app-primary); color: #fff; border-radius: 50%; width: 30px; height: 30px; padding: 0; display: flex; align-items: center; justify-content: center; margin: 0 auto; }
+    .calendar-day.today { background: var(--gray-100); color: var(--app-primary); border-radius: 50%; width: 30px; height: 30px; padding: 0; display: flex; align-items: center; justify-content: center; margin: 0 auto; font-weight: 600; }
+    .calendar-day.today:hover { background: var(--gray-100); color: var(--app-primary); }
     .calendar-day.has-shift::after {
       content: '';
       position: absolute;
@@ -588,7 +584,6 @@
     }
     .calendar-wrapper .calendar-month {
       font-size: 14px;
-      font-weight: 600;
     }
     .calendar-wrapper .calendar-grid {
       gap: 3px;
@@ -687,7 +682,7 @@
       font-size: 12px;
     }
     .variant-link:hover {
-      background: var(--black-alpha-100);
+      background: none;
       color: var(--app-primary);
     }
     .variant-link.active {
@@ -783,7 +778,7 @@
               <!-- Current Month -->
               <div class="calendar-wrapper">
                 <div class="calendar-header">
-                  <span class="calendar-month" id="current-month-label">March 2025</span>
+                  <span class="calendar-month" id="current-month-label"><span class="cal-month-name">March</span><span class="cal-month-year">2026</span></span>
                 </div>
                 <div class="calendar-grid" id="current-month-grid">
                   <div class="calendar-dow">Sun</div><div class="calendar-dow">Mon</div><div class="calendar-dow">Tue</div><div class="calendar-dow">Wed</div><div class="calendar-dow">Thu</div><div class="calendar-dow">Fri</div><div class="calendar-dow">Sat</div>
@@ -793,7 +788,7 @@
               <!-- Next Month -->
               <div class="calendar-wrapper">
                 <div class="calendar-header">
-                  <span class="calendar-month" id="next-month-label">April 2025</span>
+                  <span class="calendar-month" id="next-month-label"><span class="cal-month-name">April</span><span class="cal-month-year">2026</span></span>
                 </div>
                 <div class="calendar-grid" id="next-month-grid">
                   <div class="calendar-dow">Sun</div><div class="calendar-dow">Mon</div><div class="calendar-dow">Tue</div><div class="calendar-dow">Wed</div><div class="calendar-dow">Thu</div><div class="calendar-dow">Fri</div><div class="calendar-dow">Sat</div>
@@ -806,7 +801,7 @@
 
             <!-- Submit Section -->
             <div class="form-divider" style="border-top: 1px solid var(--black-alpha-200);">
-              <button class="submit-btn">Submit Request</button>
+              <button class="submit-btn" disabled>Submit Request</button>
               <p class="submit-summary" id="submit-summary">0 Flex, 0 hours</p>
             </div>
           </section>
@@ -815,11 +810,12 @@
           <aside id="right-column" class="right-column visible">
             <div class="summary-card">
               <h2 class="summary-title">Request Summary</h2>
-              <div class="summary-row"><i data-lucide="map-pin" class="summary-icon"></i> Galleria - Houston</div>
+              <div class="summary-row"><i data-lucide="map-pin" class="summary-icon"></i> <span id="summary-location-text">Galleria - Houston</span></div>
               <div class="summary-row"><i data-lucide="clock" class="summary-icon"></i> CDT US/Central</div>
+              <div class="summary-row" id="summary-roles-row" style="display:none;"><i data-lucide="briefcase" class="summary-icon"></i> <span id="summary-roles-text"></span></div>
               <div class="budget-section">
                 <div class="budget-label">Budget Impact</div>
-                <div class="budget-row"><span>Mar '25</span><span>Requesting 0h</span></div>
+                <div class="budget-row"><span>Mar '26</span><span id="summary-requesting">Requesting 0h</span></div>
                 <div class="budget-bar"><div class="budget-fill"></div><div class="budget-requested"></div></div>
                 <div class="budget-row" style="margin-top:4px;"><span></span><span class="budget-hours">250h</span></div>
               </div>
@@ -839,7 +835,7 @@
           </div>
 
           <div class="modal-date-display" id="modal-date-display">
-            Monday, March 3, 2025
+            Saturday, March 7, 2026
           </div>
 
           <div class="form-question">
@@ -966,8 +962,8 @@
       var editingIndex = null;
 
       // Calendar generation
-      var currentDate = new Date(2025, 2, 1); // March 2025 (month is 0-indexed)
-      var today = new Date(2025, 2, 7); // March 7, 2025 as "today" for prototype
+      var currentDate = new Date(2026, 2, 1); // March 2026 (month is 0-indexed)
+      var today = new Date(2026, 2, 7); // March 7, 2026 as "today" for prototype
 
       function generateCalendar(year, month, gridId, labelId) {
         var grid = document.getElementById(gridId);
@@ -1055,6 +1051,21 @@
       function updateSummary() {
         var totalHours = shifts.reduce(function(sum, shift) { return sum + shift.hours; }, 0);
         submitSummary.textContent = shifts.length + ' Flex, ' + totalHours + ' hours';
+        updateSummaryPanel(totalHours);
+      }
+
+      function updateSummaryPanel(hours) {
+        hours = hours || 0;
+        var locationSel = document.getElementById('location-select');
+        var locationText = locationSel.options[locationSel.selectedIndex] ? locationSel.options[locationSel.selectedIndex].text : '';
+        var locSpan = document.getElementById('summary-location-text');
+        if (locSpan) locSpan.textContent = locationText || 'Choose Location';
+
+        var reqSpan = document.getElementById('summary-requesting');
+        if (reqSpan) reqSpan.textContent = 'Requesting ' + hours + 'h';
+
+        var budgetReq = document.querySelector('.budget-requested');
+        if (budgetReq) budgetReq.style.width = Math.min(45, hours * 3) + '%';
       }
 
       function openModalForEdit(index) {
@@ -1248,6 +1259,43 @@
           }
         });
       }
+
+      // Form validation
+      function checkFormValid() {
+        var locationOk = (document.getElementById('location-select').value !== '');
+        var shiftsOk = shifts.length > 0;
+        var chipsOk = document.querySelectorAll('.role-chip.checked').length > 0;
+        document.querySelector('.submit-btn').disabled = !(locationOk && shiftsOk && chipsOk);
+      }
+
+      function updateRolesSummary() {
+        var checked = document.querySelectorAll('.role-chip.checked');
+        var rolesRow = document.getElementById('summary-roles-row');
+        var rolesText = document.getElementById('summary-roles-text');
+        if (checked.length > 0) {
+          var names = Array.from(checked).map(function(c) { return c.getAttribute('data-role'); }).join(', ');
+          rolesText.textContent = names;
+          rolesRow.style.display = '';
+        } else {
+          rolesRow.style.display = 'none';
+        }
+      }
+
+      document.querySelectorAll('.role-chip').forEach(function(btn) {
+        btn.addEventListener('click', function() { this.classList.toggle('checked'); checkFormValid(); updateRolesSummary(); });
+      });
+
+      document.getElementById('location-select').addEventListener('change', function() {
+        checkFormValid();
+        updateSummaryPanel(shifts.reduce(function(sum, s) { return sum + s.hours; }, 0));
+      });
+
+      // Patch updateSummary to also re-check validity
+      var _origUpdateSummary = updateSummary;
+      updateSummary = function() { _origUpdateSummary(); checkFormValid(); };
+
+      checkFormValid();
+      updateSummaryPanel(0);
 
       // Frequency chip selection
       document.querySelectorAll('.frequency-chip').forEach(function(chip) {
