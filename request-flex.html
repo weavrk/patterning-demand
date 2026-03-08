@@ -107,24 +107,23 @@
 
     body {
       margin: 0;
-      min-height: 100vh;
+      height: 100vh;
+      overflow: hidden;
       font-family: "Circular STD", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--text-primary);
       display: flex;
       flex-direction: column;
-      overflow-x: auto;
-      overflow-y: hidden;
       background: var(--background-sky);
     }
 
-    /* AppLayout - full width; nav fills left, main fixed, spacer fills right */
+    /* AppLayout - full width; nav fills left, main fixed, spacer fills right; horizontal scroll on narrow viewports */
     .app-layout {
       display: flex;
       flex: 1;
       min-width: min-content;
-      min-height: 100vh;
-      height: 100vh;
-      overflow: hidden;
+      min-height: 0;
+      overflow-x: auto;
+      overflow-y: hidden;
       align-items: stretch;
     }
 
@@ -220,18 +219,19 @@
     .user-name { font-weight: 500; font-size: 14px; color: var(--app-secondary); margin-left: 8px; }
     .logout-btn { background: none; border: none; padding: 8px 4px 0; font-size: 14px; color: var(--text-hint); cursor: pointer; }
 
-    /* Main content area */
+    /* Main content area - fills available space, scrolls vertically when content overflows */
     .main-content {
-      flex: 0 0 auto;
+      flex: 1 1 auto;
+      min-height: 0;
       display: flex;
       flex-direction: column;
       overflow-y: auto;
       overflow-x: hidden;
-      padding: 16px 0 16px 16px;
+      padding: 24px;
     }
 
     /* AppHeading */
-    .page-heading { display: flex; align-items: center; margin-bottom: 8px; margin-left: 8px; }
+    .page-heading { display: flex; align-items: center; margin-bottom: 8px; }
     .page-heading-icon { width: 24px; height: 24px; margin-right: 8px; color: var(--app-primary-light); }
     .page-heading-title { font-size: 24px; font-weight: 600; color: var(--app-primary-light); }
 
@@ -251,7 +251,6 @@
       flex: 0 0 520px;
       max-width: 520px;
       min-width: 0;
-      margin-left: 8px;
       background: var(--main-white);
       border: 1px solid var(--black-alpha-100);
       border-radius: var(--radius-lg);
@@ -261,8 +260,10 @@
     }
 
     .form-question { margin-bottom: 24px; }
+    .form-question.form-question-row { display: flex; align-items: center; gap: 12px; }
+    .form-question.form-question-row .form-label { margin-bottom: 0; }
     .form-label { display: block; font-weight: 500; color: var(--app-primary); margin-bottom: 4px; font-size: 16px; }
-    .form-label-sm { font-size: 16px; font-weight: 400; color: var(--text-hint); margin-bottom: 4px; }
+    .form-label-sm { font-size: 14px; font-weight: 400; color: var(--app-secondary); margin-bottom: 4px; }
     .form-select, .form-input {
       padding: 8px 12px;
       border: 1px solid var(--black-alpha-200);
@@ -293,7 +294,13 @@
       color: var(--app-secondary);
     }
     .form-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-end; }
-    .form-row-item { display: flex; flex-direction: column; flex: 1; min-width: 100px; }
+    .form-row-item { display: flex; flex-direction: column; min-width: 80px; }
+    .form-row-item .form-label-sm,
+    .form-row-item .form-select { width: 100%; box-sizing: border-box; }
+    .form-row-item .form-select { min-width: 0; }
+    .form-row-item:first-child { flex: 0 0 154px; min-width: 154px; }
+    .form-row-item:nth-child(2),
+    .form-row-item:nth-child(3) { flex: 0 0 112px; min-width: 112px; }
     .switch-row { display: flex; align-items: center; gap: 8px; margin-top: 24px; font-size: 16px; color: var(--text-primary); cursor: pointer; }
     .switch { width: 36px; height: 20px; border-radius: 10px; background: #e2e8f0; position: relative; cursor: pointer; flex-shrink: 0; transition: background 0.2s; }
     .switch.on { background: var(--green-500); }
@@ -315,16 +322,16 @@
     /* QuestionRoles - role checkboxes */
     .roles-section { margin-top: 8px; }
     .role-category { margin-bottom: 24px; }
-    .role-category-label { font-size: 16px; color: var(--text-hint); margin-bottom: 12px; }
+    .role-category-label { font-size: 14px; color: var(--app-secondary); margin-bottom: 12px; }
     .role-chips { display: flex; flex-wrap: wrap; gap: 8px; }
     .role-chip {
       display: inline-flex; align-items: center; gap: 8px;
-      padding: 8px 12px; border-radius: 8px;
+      padding: 0 12px; border-radius: 8px;
       border: 1px solid var(--gray-100);
       background: var(--main-white);
-      font-size: 16px; font-weight: 500; color: var(--text-primary);
+      font-size: 16px; font-weight: 400; color: var(--text-primary);
       cursor: pointer; transition: all 0.15s;
-      height: 40px;
+      height: 32px;
     }
     .role-chip:hover { border-color: var(--green-100); background: var(--green-100); color: var(--green-600); }
     .role-chip.checked { border-color: var(--green-200); background: var(--green-100); color: var(--green-600); }
@@ -388,7 +395,6 @@
       flex: 0 0 520px;
       max-width: 520px;
       min-width: 0;
-      margin-left: 8px;
       background: var(--main-white);
       border: 1px solid var(--black-alpha-100);
       border-radius: var(--radius-lg);
@@ -650,7 +656,7 @@
         <section class="form-card">
           <div class="form-question">
             <label class="form-label">Location</label>
-            <select id="location-select" class="form-select" style="width:100%; max-width:280px;">
+            <select id="location-select" class="form-select" style="width:100%;">
               <option value="">Choose Location</option>
               <option value="galleria" selected>Galleria - Houston</option>
               <option value="downtown">Downtown - Austin</option>
@@ -695,7 +701,7 @@
             </label>
           </div>
 
-          <div class="form-question">
+          <div class="form-question form-question-row">
             <label class="form-label">Number of People</label>
             <select class="form-select" style="width:100px;">
               <option>1</option>
@@ -814,7 +820,6 @@
         </aside>
       </div>
     </main>
-    <div class="main-spacer" aria-hidden="true"></div>
   </div>
   <script>
     function init() {

@@ -107,24 +107,23 @@
 
     body {
       margin: 0;
-      min-height: 100vh;
+      height: 100vh;
+      overflow: hidden;
       font-family: "Circular STD", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--text-primary);
       display: flex;
       flex-direction: column;
-      overflow-x: auto;
-      overflow-y: hidden;
       background: var(--background-sky);
     }
 
-    /* AppLayout - full width; nav fills left, main fixed, spacer fills right */
+    /* AppLayout - full width; nav fills left, main fixed, spacer fills right; horizontal scroll on narrow viewports */
     .app-layout {
       display: flex;
       flex: 1;
       min-width: min-content;
-      min-height: 100vh;
-      height: 100vh;
-      overflow: hidden;
+      min-height: 0;
+      overflow-x: auto;
+      overflow-y: hidden;
       align-items: stretch;
     }
 
@@ -228,11 +227,11 @@
       flex-direction: column;
       overflow-y: auto;
       overflow-x: hidden;
-      padding: 16px 0 16px 16px;
+      padding: 24px;
     }
 
     /* AppHeading */
-    .page-heading { display: flex; align-items: center; margin-bottom: 8px; margin-left: 8px; }
+    .page-heading { display: flex; align-items: center; margin-bottom: 8px; }
     .page-heading-icon { width: 24px; height: 24px; margin-right: 8px; color: var(--app-primary-light); }
     .page-heading-title { font-size: 24px; font-weight: 600; color: var(--app-primary-light); }
 
@@ -252,18 +251,17 @@
       flex: 0 0 520px;
       max-width: 520px;
       min-width: 0;
-      margin-left: 8px;
       background: var(--main-white);
       border: 1px solid var(--black-alpha-100);
       border-radius: var(--radius-lg);
       box-shadow: var(--shadow-sm);
-      padding: 12px 24px 48px;
+      padding: 24px;
       flex-shrink: 0;
     }
 
     .form-question { margin-bottom: 16px; }
     .form-label { display: block; font-weight: 500; color: var(--app-primary); margin-bottom: 4px; font-size: 16px; }
-    .form-label-sm { font-size: 16px; font-weight: 400; color: var(--text-hint); margin-bottom: 4px; }
+    .form-label-sm { font-size: 16px; font-weight: 400; color: var(--app-primary); margin-bottom: 4px; }
     .form-select, .form-input {
       padding: 8px 12px;
       border: 1px solid var(--black-alpha-200);
@@ -271,7 +269,7 @@
       font-size: 16px;
       color: var(--text-primary);
       background: var(--main-white);
-      width: 246px;
+      width: 230px;
       height: 40px;
     }
     .form-select {
@@ -317,12 +315,12 @@
     .role-chips { display: flex; flex-wrap: wrap; gap: 8px; }
     .role-chip {
       display: inline-flex; align-items: center; gap: 8px;
-      padding: 8px 12px; border-radius: 8px;
+      padding: 0 12px; border-radius: 8px;
       border: 1px solid var(--gray-100);
       background: var(--main-white);
-      font-size: 16px; font-weight: 500; color: var(--text-primary);
+      font-size: 16px; font-weight: 400; color: var(--text-primary);
       cursor: pointer; transition: all 0.15s;
-      height: 40px;
+      height: 32px;
     }
     .role-chip:hover { border-color: var(--green-100); background: var(--green-100); color: var(--green-600); }
     .role-chip.checked { border-color: var(--green-200); background: var(--green-100); color: var(--green-600); }
@@ -382,28 +380,50 @@
     .schedule-badge { font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: 6px; background: var(--navy-100); color: var(--app-primary); }
 
     /* Date input with calendar icon */
-    .date-input-wrap { position: relative; width: 246px; }
+    .date-input-wrap { position: relative; width: 230px; }
     .date-input { width: 100%; padding: 8px 36px 8px 12px; }
     .date-icon {
       position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
       width: 16px; height: 16px; color: var(--text-hint); pointer-events: none;
     }
 
-    /* Start/End/Flexible row */
-    .start-end-row { flex-wrap: nowrap; gap: 10px; }
-    .start-end-row .form-row-item { width: 118px; flex-shrink: 0; }
-    .start-end-row .form-row-item .form-select { width: 100%; }
-    .flexible-group { display: flex; flex-direction: column; flex: 1; min-width: 0; }
-    .flexible-label-row {
-      display: flex; align-items: center; gap: 4px;
-      font-size: 16px; color: var(--app-primary); margin-bottom: 4px; white-space: nowrap;
+    /* Time + Flexible row with vertical divider */
+    .time-flex-row {
+      display: flex; align-items: stretch; gap: 24px;
     }
-    .flexible-label-row .info-icon { width: 16px; height: 16px; flex-shrink: 0; color: var(--text-hint); }
-    .flex-pills { display: flex; gap: 6px; }
+    .time-inputs-section {
+      display: flex; flex-direction: column; gap: 16px;
+    }
+    .time-flex-row .start-block,
+    .time-flex-row .end-block { width: fit-content; }
+    .time-flex-row .start-block .form-label-sm,
+    .time-flex-row .end-block .form-label-sm { margin-bottom: 4px; }
+    .time-divider-wrap { padding-top: 24px; width: 1px; flex-shrink: 0; display: flex; flex-direction: column; min-height: 0; }
+    .time-divider {
+      width: 1px; flex: 1; min-height: 0; background: var(--black-alpha-100);
+    }
+    .flexible-section {
+      width: fit-content; align-self: flex-start; display: flex; flex-direction: column; gap: 0;
+      font-size: 16px; color: var(--app-primary); white-space: nowrap;
+    }
+    .flexible-label-wrap { display: flex; align-items: center; gap: 4px; margin-bottom: 4px; width: fit-content; }
+    .flexible-label-wrap .info-icon { width: 18px; height: 18px; flex-shrink: 0; color: var(--text-hint); }
+    .start-end-time-group { display: flex; align-items: center; gap: 6px; }
+    .start-end-time-group .form-select-hour { width: 96px; flex-shrink: 0; }
+    .start-end-time-group .form-select-min { width: 96px; flex-shrink: 0; color: var(--app-secondary); }
+    .start-end-time-group .time-sep { font-size: 16px; color: var(--app-secondary); padding: 0 2px; line-height: 1; }
+    .start-end-time-group .form-select-ampm { width: 80px; flex-shrink: 0; color: var(--app-secondary); }
+    .start-end-time-group:has(.form-select-hour:not(.placeholder)) .form-select-min,
+    .start-end-time-group:has(.form-select-hour:not(.placeholder)) .form-select-ampm,
+    .start-end-time-group:has(.form-select-hour:not(.placeholder)) .time-sep { color: var(--text-primary); }
+    .flex-pills { display: flex; gap: 8px; }
+    .flex-pills-stacked { flex-direction: column; width: 100%; }
+    .flex-pills-stacked .flex-pill { flex: none; width: 100%; }
     .flex-pill {
-      padding: 8px 10px; border: 1px solid var(--black-alpha-200); border-radius: 6px;
-      background: var(--main-white); font-size: 16px; font-weight: 500; color: var(--text-primary);
+      height: 40px; padding: 0 10px; border: 1px solid var(--black-alpha-200); border-radius: 6px;
+      background: var(--main-white); font-size: 16px; font-weight: 400; color: var(--text-primary);
       cursor: pointer; white-space: nowrap; transition: all 0.15s; font-family: inherit;
+      display: inline-flex; align-items: center; justify-content: center;
     }
     .flex-pill:hover { background: var(--gray-50); }
     .flex-pill.active { border-color: var(--green-200); background: var(--green-100); color: var(--green-600); }
@@ -414,13 +434,13 @@
 
     /* Repeat + Frequency row */
     .repeat-frequency-row { flex-wrap: nowrap; gap: 10px; }
-    .repeat-frequency-row .repeat-item { width: 246px; flex-shrink: 0; }
+    .repeat-frequency-row .repeat-item { width: 230px; flex-shrink: 0; }
     .repeat-frequency-row .frequency-item { flex: 1; min-width: 0; }
     .repeat-frequency-row .frequency-item .form-select { width: 100%; }
 
     /* Location + Number of People row */
     .location-people-row { flex-wrap: nowrap; gap: 10px; }
-    .location-people-row .location-item { width: 246px; flex-shrink: 0; }
+    .location-people-row .location-item { width: 230px; flex-shrink: 0; }
     .location-people-row .people-item { flex: 1; min-width: 0; }
     .location-people-row .people-item .form-select { width: 100%; }
 
@@ -433,7 +453,7 @@
       border: 1px solid var(--black-alpha-200); border-radius: 6px;
       font-size: 16px; color: var(--text-primary); background: var(--main-white); font-family: inherit;
     }
-    .shifts-label { font-size: 16px; color: var(--text-hint); flex-shrink: 0; }
+    .shifts-label { font-size: 16px; color: var(--app-primary); flex-shrink: 0; }
 
     /* Variant navigation in sidebar */
     .variant-nav {
@@ -548,47 +568,82 @@
                 <i data-lucide="calendar" class="date-icon"></i>
               </div>
             </div>
-            <div class="form-row start-end-row">
-              <div class="form-row-item">
-                <label class="form-label-sm">Start</label>
-                <select class="form-select">
-                  <option value="">Select</option>
-                  <option>8:00am</option>
-                  <option>9:00am</option>
-                  <option>10:00am</option>
-                  <option>11:00am</option>
-                  <option>12:00pm</option>
-                  <option>1:00pm</option>
-                  <option>2:00pm</option>
-                  <option>3:00pm</option>
-                  <option>4:00pm</option>
-                  <option>5:00pm</option>
-                </select>
+            <div class="time-flex-row">
+              <div class="time-inputs-section">
+                <div class="start-block">
+                  <label class="form-label-sm">Start Time</label>
+                  <div class="start-end-time-group">
+                    <select class="form-select form-select-hour">
+                      <option value="">Select</option>
+                      <option value="12">12</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                      <option value="11">11</option>
+                    </select>
+                    <span class="time-sep">:</span>
+                    <select class="form-select form-select-min">
+                      <option value="00">00</option>
+                      <option value="15">15</option>
+                      <option value="30">30</option>
+                      <option value="45">45</option>
+                    </select>
+                    <select class="form-select form-select-ampm">
+                      <option selected>AM</option>
+                      <option>PM</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="end-block">
+                  <label class="form-label-sm">End</label>
+                  <div class="start-end-time-group">
+                    <select class="form-select form-select-hour">
+                      <option value="">Select</option>
+                      <option value="12">12</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                      <option value="11">11</option>
+                    </select>
+                    <span class="time-sep">:</span>
+                    <select class="form-select form-select-min">
+                      <option value="00">00</option>
+                      <option value="15">15</option>
+                      <option value="30">30</option>
+                      <option value="45">45</option>
+                    </select>
+                    <select class="form-select form-select-ampm">
+                      <option selected>AM</option>
+                      <option>PM</option>
+                    </select>
+                  </div>
+                </div>
               </div>
-              <div class="form-row-item">
-                <label class="form-label-sm">End</label>
-                <select class="form-select">
-                  <option value="">Select</option>
-                  <option>9:00am</option>
-                  <option>10:00am</option>
-                  <option>11:00am</option>
-                  <option>12:00pm</option>
-                  <option>1:00pm</option>
-                  <option>2:00pm</option>
-                  <option>3:00pm</option>
-                  <option>4:00pm</option>
-                  <option>5:00pm</option>
-                  <option>6:00pm</option>
-                </select>
+              <div class="time-divider-wrap">
+                <div class="time-divider"></div>
               </div>
-              <div class="flexible-group">
-                <div class="flexible-label-row">
-                  <span>Start time is flexible</span>
+              <div class="flexible-section">
+                <div class="flexible-label-wrap">
+                  <span>Flexible Time</span>
                   <i data-lucide="info" class="info-icon"></i>
                 </div>
-                <div class="flex-pills">
-                  <button type="button" class="flex-pill">+/- 1hr</button>
-                  <button type="button" class="flex-pill">+/- 2hrs</button>
+                <div class="flex-pills flex-pills-stacked">
+                  <button type="button" class="flex-pill">± 1hr</button>
+                  <button type="button" class="flex-pill">± 2hrs</button>
                 </div>
               </div>
             </div>
@@ -673,24 +728,25 @@
                 <div class="role-category-label">Customer Facing</div>
                 <div class="role-chips">
                   <button type="button" class="role-chip checked" data-role="Sales Associate"><i data-lucide="shopping-bag" class="chip-icon"></i>Sales Associate</button>
-                  <button type="button" class="role-chip" data-role="Cashier"><i data-lucide="credit-card" class="chip-icon"></i>Cashier</button>
-                  <button type="button" class="role-chip" data-role="Event Help"><i data-lucide="sparkles" class="chip-icon"></i>Event Help</button>
+                  <button type="button" class="role-chip" data-role="Greeter"><i data-lucide="smile" class="chip-icon"></i>Greeter</button>
                   <button type="button" class="role-chip" data-role="Fitting Rooms"><i data-lucide="shirt" class="chip-icon"></i>Fitting Rooms</button>
                   <button type="button" class="role-chip" data-role="Floor Organization"><i data-lucide="layout-grid" class="chip-icon"></i>Floor Organization</button>
-                  <button type="button" class="role-chip" data-role="Greeter"><i data-lucide="smile" class="chip-icon"></i>Greeter</button>
+                  <button type="button" class="role-chip" data-role="Cashier"><i data-lucide="credit-card" class="chip-icon"></i>Cashier</button>
                 </div>
               </div>
               <div class="role-category">
                 <div class="role-category-label">Back of House</div>
                 <div class="role-chips">
-                  <button type="button" class="role-chip" data-role="Inventory Management"><i data-lucide="clipboard-check" class="chip-icon"></i>Inventory Management</button>
+                  <button type="button" class="role-chip" data-role="Inventory"><i data-lucide="clipboard-check" class="chip-icon"></i>Inventory</button>
                   <button type="button" class="role-chip" data-role="Omni Help"><i data-lucide="mouse-pointer" class="chip-icon"></i>Omni Help</button>
                   <button type="button" class="role-chip" data-role="Shipments"><i data-lucide="truck" class="chip-icon"></i>Shipments</button>
                 </div>
               </div>
               <div class="role-category" style="margin-bottom:0;">
-                <div class="role-category-label">Other</div>
+                <div class="role-category-label">Special Event</div>
                 <div class="role-chips">
+                  <button type="button" class="role-chip" data-role="Warehouse Sale"><i data-lucide="package" class="chip-icon"></i>Warehouse Sale</button>
+                  <button type="button" class="role-chip" data-role="Event Help"><i data-lucide="sparkles" class="chip-icon"></i>Event Help</button>
                   <button type="button" class="role-chip" data-role="NSO Support"><i data-lucide="target" class="chip-icon"></i>NSO Support</button>
                 </div>
               </div>
@@ -751,7 +807,6 @@
         </aside>
       </div>
     </main>
-    <div class="main-spacer" aria-hidden="true"></div>
   </div>
   <script>
     function init() {
