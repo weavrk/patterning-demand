@@ -294,6 +294,7 @@
       color: var(--app-secondary);
     }
     .form-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-end; }
+    .form-row.location-people-row { gap: 16px; }
     .form-row-item { display: flex; flex-direction: column; min-width: 80px; }
     .form-row-item .form-label-sm,
     .form-row-item .form-select { width: 100%; box-sizing: border-box; }
@@ -655,13 +656,27 @@
         <!-- RequestWorkerForm -->
         <section class="form-card">
           <div class="form-question">
-            <label class="form-label">Location</label>
-            <select id="location-select" class="form-select" style="width:100%;">
-              <option value="">Choose Location</option>
-              <option value="galleria" selected>Galleria - Houston</option>
-              <option value="downtown">Downtown - Austin</option>
-              <option value="midtown">Midtown - Dallas</option>
-            </select>
+            <div class="form-row location-people-row">
+              <div class="form-row-item">
+                <label class="form-label">Location</label>
+                <select id="location-select" class="form-select" style="width:100%;">
+                  <option value="">Choose Location</option>
+                  <option value="galleria" selected>Galleria - Houston</option>
+                  <option value="downtown">Downtown - Austin</option>
+                  <option value="midtown">Midtown - Dallas</option>
+                </select>
+              </div>
+              <div class="form-row-item">
+                <label class="form-label">Number of People</label>
+                <select class="form-select" style="width:100px;">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>
+              </div>
+            </div>
           </div>
 
           <div id="shifts-container">
@@ -699,16 +714,6 @@
               <span>Time Is Flexible</span>
               <i data-lucide="info" class="switch-info" style="width:16px;height:16px"></i>
             </label>
-          </div>
-
-          <div class="form-question form-question-row">
-            <label class="form-label">Number of People</label>
-            <select class="form-select" style="width:100px;">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-            </select>
           </div>
 
           <div class="form-question">

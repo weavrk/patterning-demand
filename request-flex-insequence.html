@@ -5,6 +5,8 @@
   <title>Reflex | Request Reflexer - InSequence</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <style>
     /* Circular STD font */
     @font-face {
@@ -391,6 +393,90 @@
     /* Date input with calendar icon */
     .date-input-wrap { position: relative; width: 300px; }
     .date-input { width: 100%; padding: 8px 36px 8px 12px; }
+    .date-input-wrap.ends-date { width: 218px; }
+    /* Flatpickr: appended to .date-input-wrap, positioned below input */
+    .date-input-wrap .flatpickr-calendar {
+      position: absolute !important;
+      top: 100% !important;
+      left: 0 !important;
+      right: auto !important;
+      margin-top: 4px;
+      padding: 16px;
+      width: 100% !important;
+      min-width: 308px;
+      box-sizing: border-box;
+      z-index: 100;
+      font-family: inherit;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 8px 16px -8px rgba(0, 0, 0, 0.15);
+      direction: ltr;
+    }
+    .date-input-wrap .flatpickr-days,
+    .date-input-wrap .dayContainer {
+      direction: ltr;
+      flex-direction: row;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+    }
+    /* All text in the date picker uses primary color */
+    .date-input-wrap .flatpickr-calendar,
+    .date-input-wrap .flatpickr-day,
+    .date-input-wrap span.flatpickr-weekday,
+    .date-input-wrap .flatpickr-prev-month svg,
+    .date-input-wrap .flatpickr-next-month svg {
+      color: var(--app-primary) !important;
+      fill: var(--app-primary) !important;
+    }
+    .date-input-wrap .flatpickr-day.prevMonthDay,
+    .date-input-wrap .flatpickr-day.nextMonthDay {
+      color: var(--app-secondary) !important;
+    }
+    /* Flatpickr header: month+year left, both arrows right */
+    .date-input-wrap .flatpickr-months {
+      display: flex; flex-direction: row; align-items: center; justify-content: space-between; padding-bottom: 12px;
+    }
+    .date-input-wrap .flatpickr-month { display: flex; flex-direction: row; align-items: center; justify-content: flex-start; flex: 1; margin-left: 0 !important; padding-left: 0 !important; text-align: left; }
+    .date-input-wrap .flatpickr-current-month {
+      position: static !important; left: auto !important; width: auto !important;
+      display: flex; align-items: center; justify-content: flex-start; gap: 4px; padding: 0 !important; margin: 0 !important; margin-left: 0 !important; padding-left: 0 !important; text-align: left;
+    }
+    .date-input-wrap .flatpickr-current-month .cur-month,
+    .date-input-wrap .flatpickr-current-month .cur-year,
+    .date-input-wrap .flatpickr-current-month .numInputWrapper {
+      font-size: 20px; color: #18181B; text-align: left; justify-content: flex-start; align-items: center; margin: 0 !important;
+    }
+    .date-input-wrap .flatpickr-current-month .cur-month { font-weight: 600; }
+    .date-input-wrap .flatpickr-current-month select.flatpickr-monthDropdown-months { display: none !important; }
+    .date-input-wrap .flatpickr-current-month .numInputWrapper { display: inline-flex; align-items: center; }
+    .date-input-wrap .flatpickr-current-month .cur-year { font-weight: 400; border: none; background: none; padding: 0; width: 5ch; -moz-appearance: textfield; }
+    .date-input-wrap .flatpickr-current-month .numInputWrapper .arrowUp,
+    .date-input-wrap .flatpickr-current-month .numInputWrapper .arrowDown { display: none; }
+    .date-input-wrap .flatpickr-prev-month,
+    .date-input-wrap .flatpickr-next-month { position: static !important; display: flex; align-items: center; justify-content: center; padding: 0; width: 16px; height: 16px; }
+    .date-input-wrap .flatpickr-prev-month svg,
+    .date-input-wrap .flatpickr-next-month svg { width: 20px; height: 20px; }
+    .date-input-wrap .fp-nav { display: flex; align-items: center; gap: 16px; }
+    .date-input-wrap .flatpickr-day.prototype-today {
+      background: var(--gray-100) !important; color: var(--app-primary) !important; border-color: var(--gray-100) !important;
+      border-radius: 50%; width: 32px !important; height: 32px !important; line-height: 32px !important;
+      max-width: 32px; align-self: center; font-weight: 600;
+    }
+    .date-input-wrap .flatpickr-day.prototype-today:hover {
+      background: var(--gray-100) !important; border-color: var(--gray-100) !important; color: var(--app-primary) !important;
+    }
+    .date-input-wrap .flatpickr-day.selected,
+    .date-input-wrap .flatpickr-day.selected:hover,
+    .date-input-wrap .flatpickr-day.selected:focus {
+      background: var(--app-primary) !important; border-color: var(--app-primary) !important; color: #fff !important;
+      border-radius: 50%; width: 32px !important; height: 32px !important; line-height: 32px !important;
+      max-width: 32px; align-self: center;
+    }
+    .date-input-wrap .flatpickr-goto-today {
+      display: block; text-align: center; padding: 12px 0 0; margin-top: 12px;
+      border-top: 1px solid rgba(0,0,0,0.08);
+      font-size: 14px; color: #18181B; cursor: pointer; font-family: inherit;
+    }
+    .date-input-wrap .flatpickr-goto-today:hover { color: #3C8E84; }
     .date-icon {
       position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
       width: 16px; height: 16px; color: var(--text-hint); pointer-events: none;
@@ -447,14 +533,13 @@
     .repeat-frequency-row .frequency-item .form-select { width: 100%; }
 
     /* Location + Number of People row */
-    .location-people-row { flex-wrap: nowrap; gap: 10px; }
+    .location-people-row { flex-wrap: nowrap; gap: 16px; }
     .location-people-row .location-item { width: 300px; flex-shrink: 0; }
     .location-people-row .people-item { flex: 1; min-width: 0; }
     .location-people-row .people-item .form-select { width: 100%; }
 
     /* Ends After row */
     .ends-after-row { display: flex; align-items: center; gap: 24px; }
-    .date-input-wrap.ends-date { width: 218px; }
     .ends-date { flex-shrink: 0; }
     .or-label { font-size: 16px; color: var(--app-primary); flex-shrink: 0; }
     .shifts-wrap { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
@@ -574,7 +659,7 @@
             <div class="form-question">
               <label class="form-label">Date</label>
               <div class="date-input-wrap">
-                <input type="text" class="form-input date-input" placeholder="Select Date" />
+                <input type="text" class="form-input date-input" placeholder="Select" readonly />
                 <i data-lucide="calendar" class="date-icon"></i>
               </div>
             </div>
@@ -682,7 +767,7 @@
               <label class="form-label">Ends After</label>
               <div class="ends-after-row">
                 <div class="date-input-wrap ends-date">
-                  <input type="text" class="form-input date-input" placeholder="Select Date" />
+                  <input type="text" class="form-input date-input" placeholder="Select" readonly />
                   <i data-lucide="calendar" class="date-icon"></i>
                 </div>
                 <span class="or-label">or</span>
@@ -857,6 +942,46 @@
 
       document.querySelectorAll('.role-chip').forEach(function(btn) {
         btn.addEventListener('click', function() { this.classList.toggle('checked'); });
+      });
+
+      // Date inputs: Flatpickr opens calendar below on click
+      var prototypeToday = '2026-03-07';
+      document.querySelectorAll('.date-input').forEach(function(el) {
+        var wrap = el.closest('.date-input-wrap');
+        flatpickr(el, {
+          dateFormat: 'D, F j Y',
+          disableMobile: true,
+          appendTo: wrap,
+          monthSelectorType: 'static',
+          onDayCreate: function(dObj, dStr, fp, dayElem) {
+            if (dayElem && dayElem.dateObj) {
+              var dateStr = fp.formatDate(dayElem.dateObj, 'Y-m-d');
+              if (dateStr === prototypeToday) dayElem.classList.add('prototype-today');
+            }
+          },
+          onReady: function(selectedDates, dateStr, fp) {
+            var cal = fp.calendarContainer;
+            // Group prev + next arrows into a .fp-nav div after .flatpickr-month
+            var months = cal.querySelector('.flatpickr-months');
+            if (months && !months.querySelector('.fp-nav')) {
+              var prev = months.querySelector('.flatpickr-prev-month');
+              var next = months.querySelector('.flatpickr-next-month');
+              var nav = document.createElement('div');
+              nav.className = 'fp-nav';
+              if (prev) nav.appendChild(prev);
+              if (next) nav.appendChild(next);
+              months.appendChild(nav);
+            }
+            // Add "Go to today" footer
+            if (!cal.querySelector('.flatpickr-goto-today')) {
+              var link = document.createElement('div');
+              link.className = 'flatpickr-goto-today';
+              link.textContent = 'Go to today';
+              link.addEventListener('click', function() { fp.jumpToDate(new Date(2026, 2, 7)); });
+              cal.appendChild(link);
+            }
+          }
+        });
       });
     }
     if (document.readyState === 'loading') {
