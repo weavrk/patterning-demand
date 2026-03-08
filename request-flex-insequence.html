@@ -90,6 +90,8 @@
       --app-primary: #18181B;
       --app-primary-light: #3F3F46;
       --app-secondary: #A1A1AA;
+      --app-tertiary: #D4D4D8;
+      --app-quaternary: #EBEBEB;
       --app-background-navy: #F4F6F7;
       --background-sky: #FBFBFB;
       --text-primary: #0D0D0D;
@@ -251,17 +253,19 @@
       flex: 0 0 520px;
       max-width: 520px;
       min-width: 0;
+      margin-bottom: 48px;
       background: var(--main-white);
       border: 1px solid var(--black-alpha-100);
       border-radius: var(--radius-lg);
       box-shadow: var(--shadow-sm);
-      padding: 24px;
+      padding: 24px 24px 32px 24px;
       flex-shrink: 0;
     }
 
     .form-question { margin-bottom: 16px; }
-    .form-label { display: block; font-weight: 500; color: var(--app-primary); margin-bottom: 4px; font-size: 16px; }
-    .form-label-sm { font-size: 16px; font-weight: 400; color: var(--app-primary); margin-bottom: 4px; }
+    .form-label { display: block; font-weight: 500; color: var(--app-primary); margin-bottom: 8px; font-size: 16px; }
+    .roles-question > .form-label { margin-bottom: 12px; }
+    .form-label-sm { font-size: 16px; font-weight: 400; color: var(--app-primary); margin-bottom: 8px; }
     .form-select, .form-input {
       padding: 8px 12px;
       border: 1px solid var(--black-alpha-200);
@@ -301,22 +305,27 @@
     .switch.on .switch-knob { left: 18px; }
     .switch-info { color: var(--text-hint); }
     .form-divider { box-sizing: content-box; border-top: none; padding-top: 24px; margin-top: 24px; }
-    .add-additional-row { position: relative; width: 100%; margin-bottom: 32px; min-height: 40px; }
-    .add-additional-row::after { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: var(--black-alpha-200); z-index: 0; }
-    .add-shift-btn { display: inline-flex; align-items: center; justify-content: center; padding: 6px 16px; height: 32px; background: var(--main-white); border: 1px solid var(--gray-100); border-radius: var(--radius-lg); font-size: 16px; font-weight: 500; color: var(--app-primary); cursor: pointer; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 1; }
+    .add-additional-row { display: flex; align-items: center; gap: 4px; width: 100%; margin-bottom: 32px; min-height: 40px; }
+    .add-additional-divider { flex: 1; height: 1px; background: var(--black-alpha-200); }
+    .add-shift-btn { display: inline-flex; align-items: center; justify-content: center; padding: 6px 16px; height: 40px; background: var(--main-white); border: 1px solid var(--black-alpha-200); border-radius: var(--radius-lg); font-size: 16px; font-weight: 500; color: var(--app-primary); cursor: pointer; flex-shrink: 0; }
     .add-shift-btn:hover { background: var(--gray-50); }
     .submit-btn { padding: 12px 24px; background: var(--stone-700); color: var(--main-white); border: none; border-radius: 8px; font-size: 16px; font-weight: 500; cursor: pointer; display: block; margin: 0 auto; }
-    .submit-summary { text-align: center; font-size: 16px; color: var(--text-hint); margin-top: 8px; }
+    .submit-summary { text-align: center; font-size: 16px; color: var(--text-hint); margin-top: 8px; margin-bottom: 0; }
 
     /* QuestionRoles - role checkboxes */
-    .roles-section { margin-top: 8px; }
-    .role-category { margin-bottom: 24px; }
-    .role-category-label { font-size: 16px; color: var(--text-hint); margin-bottom: 12px; }
+    .roles-section { margin-top: 8px; display: flex; flex-direction: column; gap: 0; }
+    .role-category {
+      padding-bottom: 16px;
+      display: flex; flex-direction: row; align-items: flex-start; gap: 8px;
+    }
+    .role-category:last-child { padding-bottom: 0; }
+    .role-category:not(:last-child) .role-chips { padding-bottom: 16px; border-bottom: 1px solid var(--black-alpha-200); }
+    .role-category-label { width: 120px; flex-shrink: 0; font-size: 16px; color: var(--text-hint); }
     .role-chips { display: flex; flex-wrap: wrap; gap: 8px; }
     .role-chip {
       display: inline-flex; align-items: center; gap: 8px;
-      padding: 0 12px; border-radius: 8px;
-      border: 1px solid var(--gray-100);
+      padding: 0 8px; border-radius: 8px; height: 36px;
+      border: 1px solid var(--black-alpha-200);
       background: var(--main-white);
       font-size: 16px; font-weight: 400; color: var(--text-primary);
       cursor: pointer; transition: all 0.15s;
@@ -392,21 +401,19 @@
       display: flex; align-items: stretch; gap: 24px;
     }
     .time-inputs-section {
-      display: flex; flex-direction: column; gap: 16px;
+      display: flex; flex-direction: column; gap: 8px;
     }
     .time-flex-row .start-block,
-    .time-flex-row .end-block { width: fit-content; }
-    .time-flex-row .start-block .form-label-sm,
-    .time-flex-row .end-block .form-label-sm { margin-bottom: 4px; }
+    .time-flex-row .end-block { width: fit-content; display: flex; flex-direction: column; gap: 0; }
     .time-divider-wrap { padding-top: 24px; width: 1px; flex-shrink: 0; display: flex; flex-direction: column; min-height: 0; }
     .time-divider {
       width: 1px; flex: 1; min-height: 0; background: var(--black-alpha-100);
     }
     .flexible-section {
-      width: fit-content; align-self: flex-start; display: flex; flex-direction: column; gap: 0;
+      flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 0;
       font-size: 16px; color: var(--app-primary); white-space: nowrap;
     }
-    .flexible-label-wrap { display: flex; align-items: center; gap: 4px; margin-bottom: 4px; width: fit-content; }
+    .flexible-label-wrap { display: flex; align-items: center; gap: 4px; margin-bottom: 8px; width: fit-content; }
     .flexible-label-wrap .info-icon { width: 18px; height: 18px; flex-shrink: 0; color: var(--text-hint); }
     .start-end-time-group { display: flex; align-items: center; gap: 6px; }
     .start-end-time-group .form-select-hour { width: 96px; flex-shrink: 0; }
@@ -418,10 +425,10 @@
     .start-end-time-group:has(.form-select-hour:not(.placeholder)) .form-select-ampm,
     .start-end-time-group:has(.form-select-hour:not(.placeholder)) .time-sep { color: var(--text-primary); }
     .flex-pills { display: flex; gap: 8px; }
-    .flex-pills-stacked { flex-direction: column; width: 100%; }
+    .flex-pills-stacked { flex-direction: column; width: 100%; gap: 4px; }
     .flex-pills-stacked .flex-pill { flex: none; width: 100%; }
     .flex-pill {
-      height: 32px; padding: 0 10px; border: 1px solid var(--black-alpha-200); border-radius: 6px;
+      height: 36px; padding: 0 10px; border: 1px solid var(--black-alpha-200); border-radius: 6px;
       background: var(--main-white); font-size: 16px; font-weight: 400; color: var(--text-primary);
       cursor: pointer; white-space: nowrap; transition: all 0.15s; font-family: inherit;
       display: inline-flex; align-items: center; justify-content: center;
@@ -643,12 +650,13 @@
               </div>
               <div class="flexible-section">
                 <div class="flexible-label-wrap">
-                  <span>Flexible Time</span>
+                  <span>Flexible Start</span>
                   <i data-lucide="info" class="info-icon"></i>
                 </div>
                 <div class="flex-pills flex-pills-stacked">
-                  <button type="button" class="flex-pill">± 1hr</button>
-                  <button type="button" class="flex-pill">± 2hrs</button>
+                  <button type="button" class="flex-pill">+ 1 hr</button>
+                  <button type="button" class="flex-pill">+ 2 hrs</button>
+                  <button type="button" class="flex-pill">+ 3 hrs</button>
                 </div>
               </div>
             </div>
@@ -680,7 +688,7 @@
                 <span class="or-label">or</span>
                 <div class="shifts-wrap">
                   <input type="number" min="1" class="shifts-input" placeholder="Enter" />
-                  <span class="shifts-label">Shifts</span>
+                  <span class="shifts-label">shifts</span>
                 </div>
               </div>
             </div>
@@ -717,11 +725,11 @@
           <hr class="section-divider" />
 
           <!-- Where Do You Need Help? -->
-          <div class="form-question" style="margin-bottom:0;">
-            <label class="form-label">Where Do You Need Help?</label>
+          <div class="form-question roles-question" style="margin-bottom:0;">
+            <label class="form-label">Where do you need help?</label>
             <div class="roles-section">
               <div class="role-category">
-                <div class="role-category-label">Customer Facing</div>
+                <div class="role-category-label">Front of House</div>
                 <div class="role-chips">
                   <button type="button" class="role-chip checked" data-role="Sales Associate"><i data-lucide="shopping-bag" class="chip-icon"></i>Sales Associate</button>
                   <button type="button" class="role-chip" data-role="Greeter"><i data-lucide="smile" class="chip-icon"></i>Greeter</button>
@@ -734,7 +742,7 @@
                 <div class="role-category-label">Back of House</div>
                 <div class="role-chips">
                   <button type="button" class="role-chip" data-role="Inventory"><i data-lucide="clipboard-check" class="chip-icon"></i>Inventory</button>
-                  <button type="button" class="role-chip" data-role="Omni Help"><i data-lucide="mouse-pointer" class="chip-icon"></i>Omni Help</button>
+                  <button type="button" class="role-chip" data-role="Omni"><i data-lucide="mouse-pointer" class="chip-icon"></i>Omni</button>
                   <button type="button" class="role-chip" data-role="Shipments"><i data-lucide="truck" class="chip-icon"></i>Shipments</button>
                 </div>
               </div>
@@ -751,7 +759,9 @@
 
           <div class="form-divider">
             <div class="add-additional-row">
+              <div class="add-additional-divider"></div>
               <button class="add-shift-btn"><i data-lucide="plus" style="width:20px;height:20px;margin-right:6px"></i>Add Additional</button>
+              <div class="add-additional-divider"></div>
             </div>
             <button class="submit-btn" style="width:100%;">Submit Request</button>
             <p class="submit-summary">1 Flex, 3 Hours</p>
