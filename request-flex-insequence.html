@@ -89,7 +89,7 @@
       --green-500: #4BA098;
       --green-600: #3C8E84;
       --black-alpha-600: rgba(0, 0, 0, 0.48);
-      --app-primary: #18181B;
+      --app-primary: #3F3F46;
       --app-primary-light: #3F3F46;
       --app-secondary: #A1A1AA;
       --app-tertiary: #D4D4D8;
@@ -244,7 +244,7 @@
       display: flex;
       flex-direction: row;
       flex-wrap: nowrap;
-      gap: 24px;
+      gap: 16px;
       min-width: 864px;
       max-width: 1280px;
       align-items: flex-start;
@@ -266,14 +266,14 @@
 
     .form-question { margin-bottom: 16px; }
     .form-label { display: block; font-weight: 500; color: var(--app-primary); margin-bottom: 8px; font-size: 16px; }
-    .roles-question > .form-label { margin-bottom: 12px; }
+    .roles-question > .form-label { margin-bottom: 0; }
     .form-label-sm { font-size: 16px; font-weight: 400; color: var(--app-primary); margin-bottom: 8px; }
     .form-select, .form-input {
       padding: 8px 12px;
       border: 1px solid var(--black-alpha-200);
       border-radius: 6px;
       font-size: 16px;
-      color: var(--text-primary);
+      color: var(--app-primary);
       background: var(--main-white);
       width: 300px;
       height: 40px;
@@ -336,8 +336,7 @@
     .booked-flex-date { font-size: 18px; font-weight: 500; color: var(--app-primary); margin-bottom: 8px; }
     .booked-flex-time { display: flex; align-items: center; gap: 6px; color: var(--app-primary); font-size: 16px; font-weight: 400; margin-bottom: 4px; }
     .booked-flex-time .lucide { width: 16px; height: 16px; color: var(--app-primary); }
-    .booked-flex-role { display: flex; align-items: center; gap: 6px; color: var(--app-primary); font-size: 16px; font-weight: 400; margin-bottom: 4px; }
-    .booked-flex-role .lucide { width: 16px; height: 16px; color: var(--app-primary); }
+    .booked-flex-role { color: var(--app-secondary); font-size: 14px; font-weight: 400; margin-bottom: 4px; }
     .booked-flex-total-hrs { display: flex; align-items: center; gap: 4px; color: var(--app-primary); font-size: 16px; font-weight: 400; margin-bottom: 0; }
     .booked-flex-total-hrs .lucide { width: 16px; height: 16px; color: var(--app-primary); }
     .booked-flex-shift { margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid var(--black-alpha-100); }
@@ -362,34 +361,29 @@
 
     /* QuestionRoles - role checkboxes */
     .roles-section { margin-top: 8px; display: flex; flex-direction: column; gap: 0; }
-    .role-category {
-      padding-bottom: 16px;
-      display: flex; flex-direction: row; align-items: flex-start; gap: 8px;
-    }
-    .role-category:last-child { padding-bottom: 0; }
-    .role-category:not(:last-child) .role-chips { padding-bottom: 16px; border-bottom: 1px solid var(--black-alpha-200); }
-    .role-category-label { width: 120px; flex-shrink: 0; font-size: 16px; color: var(--app-primary); }
-    .role-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .role-category { display: flex; align-items: flex-start; gap: 10px; padding: 16px 0; border-bottom: 1px solid var(--black-alpha-100); }
+    .role-category:last-child { border-bottom: none; padding-bottom: 0; }
+    .role-category-label { font-size: 14px; font-weight: 400; color: var(--app-secondary); width: 96px; flex-shrink: 0; padding-top: 10px; margin-bottom: 0; }
+    .role-chips { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; flex: 1; }
     .role-chip {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 0 8px; border-radius: 8px; height: 36px;
-      border: 1px solid var(--black-alpha-200);
+      display: flex; align-items: center; gap: 8px;
+      padding: 6px 8px; border-radius: 8px; border: 1px solid var(--black-alpha-200);
       background: var(--main-white);
       font-size: 16px; font-weight: 400; color: var(--app-primary);
-      cursor: pointer; transition: all 0.15s;
-      height: 32px;
+      cursor: pointer; transition: all 0.15s; text-align: left; width: 100%; box-sizing: border-box;
     }
-    .role-chip:hover { border-color: var(--green-100); background: var(--green-100); color: var(--green-600); }
-    .role-chip:hover .chip-icon, .role-chip:hover .lucide, .role-chip:hover svg { color: inherit; stroke: currentColor; }
-    .role-chip.checked { border-color: var(--green-200); background: var(--green-100); color: var(--green-600); }
-    .role-chip.checked .chip-icon, .role-chip.checked .lucide, .role-chip.checked svg { color: inherit; stroke: currentColor; }
-    .role-chip .chip-icon, .role-chip .lucide, .role-chip svg { width: 20px; height: 20px; flex-shrink: 0; stroke: currentColor; color: var(--app-primary); }
+    .role-chip:hover { background: #FAFAFA; }
+    .role-chip:hover::after { border-color: var(--green-400); }
+    .role-chip.checked { background: var(--green-100); color: var(--green-600); }
+    .role-chip.checked::after { background: var(--green-600); border-color: var(--green-600); box-shadow: inset 0 0 0 3px var(--green-100), inset 0 0 0 5px var(--green-600); }
+    .role-chip .chip-icon, .role-chip .lucide, .role-chip svg { width: 18px; height: 18px; flex-shrink: 0; stroke: currentColor; color: var(--app-primary); }
+    .role-chip.checked .chip-icon, .role-chip.checked .lucide, .role-chip.checked svg { color: var(--green-600); stroke: var(--green-600); }
 
     /* Right column - RequestSummary + RequestWorkerCalendar; fixed width, clipped when narrow */
     .right-column {
       display: none;
       flex-direction: column;
-      gap: 20px;
+      gap: 16px;
       flex: 0 0 320px;
       width: 320px;
       margin-right: 60px;
@@ -408,25 +402,25 @@
       width: 100%;
       max-width: 320px;
     }
-    .summary-title { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+    .summary-title { font-size: 18px; font-weight: 600; margin-bottom: 8px; color: var(--app-primary); }
     .summary-row { display: flex; align-items: flex-start; gap: 8px; font-size: 16px; color: var(--app-primary); margin-bottom: 8px; }
     .summary-icon-wrap { padding-top: 2px; flex-shrink: 0; }
     .summary-icon, .summary-row .lucide, .summary-row svg, .summary-icon-wrap svg { width: 16px !important; height: 16px !important; flex-shrink: 0; }
     #summary-date-text { line-height: 20px; }
     .budget-section { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--black-alpha-200); }
-    .budget-label { font-size: 18px; font-weight: 500; margin-bottom: 4px; }
+    .budget-label { font-size: 18px; font-weight: 500; margin-bottom: 4px; color: var(--app-primary); }
     .budget-period { margin-bottom: 16px; }
     .budget-period:last-child { margin-bottom: 0; }
     .budget-row { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 8px; color: var(--app-primary); }
     .budget-row .budget-hours { font-size: 12px; color: var(--text-hint); }
     .budget-bar { height: 20px; background: #EDEDED; border-radius: 6px; overflow: hidden; position: relative; display: flex; }
-    .budget-fill { height: 100%; background: #70B9B3; border-radius: 6px 0 0 6px; width: 25%; min-width: 20px; flex-shrink: 0; }
-    .budget-requested { height: 100%; background: #9DD9CF; border-radius: 0 6px 6px 0; width: 12%; min-width: 24px; flex-shrink: 0; }
+    .budget-fill { height: 100%; background: #70B9B3; border-radius: 6px 0 0 6px; width: 24%; flex-shrink: 0; }
+    .budget-requested { height: 100%; background: #9DD9CF; border-radius: 0 6px 6px 0; flex-shrink: 0; transition: width 0.3s; }
 
     /* RequestWorkerCalendar */
-    .calendar-card { margin-top: 0; }
+    .calendar-card { margin-top: 0; border: none; }
     .calendar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-    .calendar-month { font-size: 20px; color: #18181B; display: flex; align-items: center; gap: 4px; }
+    .calendar-month { font-size: 20px; color: var(--app-primary); display: flex; align-items: center; gap: 4px; }
     .calendar-month .cal-month-name { font-weight: 600; }
     .calendar-month .cal-month-year { font-weight: 400; }
     .calendar-nav-btn { width: 28px; height: 28px; border: 1px solid var(--black-alpha-200); border-radius: 50%; background: var(--main-white); cursor: pointer; font-size: 14px; display: inline-flex; align-items: center; justify-content: center; line-height: 1; }
@@ -501,7 +495,7 @@
     .date-input-wrap .flatpickr-current-month .cur-month,
     .date-input-wrap .flatpickr-current-month .cur-year,
     .date-input-wrap .flatpickr-current-month .numInputWrapper {
-      font-size: 20px; color: #18181B; text-align: left; justify-content: flex-start; align-items: center; margin: 0 !important;
+      font-size: 20px; color: var(--app-primary); text-align: left; justify-content: flex-start; align-items: center; margin: 0 !important;
     }
     .date-input-wrap .flatpickr-current-month .cur-month { font-weight: 600; }
     .date-input-wrap .flatpickr-current-month select.flatpickr-monthDropdown-months { display: none !important; }
@@ -537,7 +531,7 @@
     .date-input-wrap .flatpickr-goto-today {
       display: block; text-align: center; padding: 12px 0 0; margin-top: 12px;
       border-top: 1px solid rgba(0,0,0,0.08);
-      font-size: 14px; color: #18181B; cursor: pointer; font-family: inherit;
+      font-size: 14px; color: var(--app-primary); cursor: pointer; font-family: inherit;
     }
     .date-input-wrap .flatpickr-goto-today:hover { color: #3C8E84; }
     .date-icon {
@@ -564,6 +558,11 @@
     }
     .flexible-label-wrap { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; width: fit-content; }
     .flexible-label-wrap .info-icon { width: 18px; height: 18px; flex-shrink: 0; color: var(--text-hint); }
+    .info-tooltip-wrap { position: relative; display: inline-flex; align-items: center; }
+    .info-tooltip-wrap .info-icon { cursor: default; }
+    .info-tooltip { position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); width: 220px; background: #18181B; color: #fff; font-size: 13px; font-weight: 400; line-height: 1.45; padding: 8px 10px; border-radius: 8px; pointer-events: none; opacity: 0; transition: opacity 0.15s; white-space: normal; z-index: 100; }
+    .info-tooltip::after { content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border: 5px solid transparent; border-top-color: #18181B; }
+    .info-tooltip-wrap:hover .info-tooltip { opacity: 1; }
     .start-end-time-group { display: flex; align-items: center; gap: 8px; }
     .time-hm-wrap { display: flex; align-items: center; gap: 2px; }
     .start-end-time-group .form-select-hour { width: 96px; flex-shrink: 0; }
@@ -692,7 +691,6 @@
           <a href="request-flex-insequence.html" class="variant-link active">InSequence</a>
           <a href="request-flex-calendarview.html" class="variant-link">CalendarView</a>
           <a href="request-flex-newtabflow.html" class="variant-link">NewTabFlow</a>
-          <a href="request-flex-opx.html" class="variant-link">Opx</a>
         </nav>
         <div class="side-nav-spacer"></div>
       </nav>
@@ -805,12 +803,15 @@
               <div class="flexible-section">
                 <div class="flexible-label-wrap">
                   <span>Flexible Start</span>
-                  <i data-lucide="info" class="info-icon"></i>
+                  <span class="info-tooltip-wrap">
+                    <i data-lucide="info" class="info-icon"></i>
+                    <span class="info-tooltip">Flexibility allows us to push back the start time to fill the shift, but the duration stays the same and ends by store close.</span>
+                  </span>
                 </div>
                 <div class="flex-pills flex-pills-stacked">
-                  <button type="button" class="flex-pill">+ 1 hr</button>
-                  <button type="button" class="flex-pill">+ 2 hrs</button>
-                  <button type="button" class="flex-pill">+ 3 hrs</button>
+                  <button type="button" class="flex-pill">+1 hr</button>
+                  <button type="button" class="flex-pill active">+2 hrs</button>
+                  <button type="button" class="flex-pill">+3 hrs</button>
                 </div>
               </div>
             </div>
@@ -827,8 +828,8 @@
                   <option>Does not repeat</option>
                   <option>Repeat daily</option>
                   <option>Repeat weekly</option>
-                  <option>Repeat 2 weeks</option>
-                  <option>Repeat 4 weeks</option>
+                  <option>Repeat every 2 weeks</option>
+                  <option>Repeat every 4 weeks</option>
                 </select>
               </div>
             </div>
@@ -889,23 +890,23 @@
                   <button type="button" class="role-chip" data-role="Greeter"><i data-lucide="smile" class="chip-icon"></i>Greeter</button>
                   <button type="button" class="role-chip" data-role="Fitting Rooms"><i data-lucide="shirt" class="chip-icon"></i>Fitting Rooms</button>
                   <button type="button" class="role-chip" data-role="Floor Organization"><i data-lucide="layout-grid" class="chip-icon"></i>Floor Organization</button>
-                  <button type="button" class="role-chip" data-role="Cashier"><i data-lucide="credit-card" class="chip-icon"></i>Cashier</button>
+                  <button type="button" class="role-chip" data-role="Cashier"><i data-lucide="circle-dollar-sign" class="chip-icon"></i>Cashier</button>
                 </div>
               </div>
               <div class="role-category">
                 <div class="role-category-label">Back of House</div>
                 <div class="role-chips">
                   <button type="button" class="role-chip" data-role="Inventory"><i data-lucide="clipboard-check" class="chip-icon"></i>Inventory</button>
-                  <button type="button" class="role-chip" data-role="Omni"><i data-lucide="mouse-pointer" class="chip-icon"></i>Omni</button>
                   <button type="button" class="role-chip" data-role="Shipments"><i data-lucide="truck" class="chip-icon"></i>Shipments</button>
+                  <button type="button" class="role-chip" data-role="Omni"><i data-lucide="expand" class="chip-icon"></i>Omni</button>
                 </div>
               </div>
               <div class="role-category" style="margin-bottom:0;">
                 <div class="role-category-label">Special Event</div>
                 <div class="role-chips">
                   <button type="button" class="role-chip" data-role="Warehouse Sale"><i data-lucide="package" class="chip-icon"></i>Warehouse Sale</button>
-                  <button type="button" class="role-chip" data-role="Event Help"><i data-lucide="sparkles" class="chip-icon"></i>Event Help</button>
-                  <button type="button" class="role-chip" data-role="NSO Support"><i data-lucide="target" class="chip-icon"></i>NSO Support</button>
+                  <button type="button" class="role-chip" data-role="NSO Support"><i data-lucide="map-pin-plus" class="chip-icon"></i>NSO Support</button>
+                  <button type="button" class="role-chip" data-role="Event Help"><i data-lucide="calendars" class="chip-icon"></i>Event Help</button>
                 </div>
               </div>
             </div>
@@ -1035,6 +1036,35 @@
         var chipsOk = document.querySelectorAll('.role-chip.checked').length > 0;
         var btn = document.querySelector('.submit-btn');
         btn.disabled = !(locationOk && dateOk && chipsOk);
+        updateSubmitSummary();
+      }
+
+      function updateSubmitSummary() {
+        var el = document.querySelector('.submit-summary');
+        if (!el) return;
+        var locationOk = (document.getElementById('location-select').value !== '');
+        var dateOk = (document.querySelector('.date-input') && document.querySelector('.date-input').value !== '');
+        var chipsOk = document.querySelectorAll('.role-chip.checked').length > 0;
+        if (!(locationOk && dateOk && chipsOk)) { el.textContent = ''; return; }
+        // Shift hours = end - start for a single shift
+        var sh = startBlock ? parseInt(startBlock.querySelector('.form-select-hour').value, 10) : NaN;
+        var sampm = startBlock ? startBlock.querySelector('.form-select-ampm').value : 'AM';
+        var eh = endBlock ? parseInt(endBlock.querySelector('.form-select-hour').value, 10) : NaN;
+        var eampm = endBlock ? endBlock.querySelector('.form-select-ampm').value : 'AM';
+        var shiftHours = (!isNaN(sh) && !isNaN(eh)) ? Math.max(0, toHour24(eh, eampm) - toHour24(sh, sampm)) : 0;
+        if (!shiftHours) {
+          var activePill = document.querySelector('.flex-pill.active');
+          if (activePill) shiftHours = parseInt(activePill.textContent.replace(/\D/g, ''), 10) || 0;
+        }
+        // Total flexes = people × shift count
+        var peopleSel = document.getElementById('people-select');
+        var numPeople = (peopleSel && peopleSel.value) ? parseInt(peopleSel.value, 10) : 1;
+        if (isNaN(numPeople) || numPeople < 1) numPeople = 1;
+        var shiftCount = typeof getProposedShiftCount === 'function' ? getProposedShiftCount() : 1;
+        var totalFlexes = numPeople * shiftCount;
+        var flexLabel = totalFlexes === 1 ? '1 Flex' : totalFlexes + ' Flexes';
+        var hrsLabel = shiftHours === 1 ? '1 hr' : shiftHours + ' hrs';
+        el.textContent = flexLabel + ', ' + hrsLabel + ' per shift';
       }
 
       function updateRolesSummary() {
@@ -1042,9 +1072,9 @@
         var rolesText = document.getElementById('summary-roles-text');
         if (checked.length > 0) {
           var peopleSel = document.getElementById('people-select');
-          var count = (peopleSel && peopleSel.value) ? peopleSel.value : checked.length;
+          var numPeople = (peopleSel && peopleSel.value) ? parseInt(peopleSel.value, 10) : 1;
           var names = Array.from(checked).map(function(c) { return c.getAttribute('data-role'); }).join(', ');
-          rolesText.textContent = '(' + count + ') ' + names;
+          rolesText.textContent = numPeople + ' ' + (numPeople === 1 ? 'Person' : 'People') + '  ·  ' + names;
         } else {
           rolesText.textContent = 'Add Support';
         }
@@ -1057,9 +1087,18 @@
       document.getElementById('location-select').addEventListener('change', checkFormValid);
       document.querySelector('.date-input').addEventListener('change', checkFormValid);
       var peopleSel = document.getElementById('people-select');
-      if (peopleSel) peopleSel.addEventListener('change', function() { updateRolesSummary(); updateSummaryPanel(); });
+      if (peopleSel) peopleSel.addEventListener('change', function() { updateRolesSummary(); updateSummaryPanel(); updateSubmitSummary(); });
+      var repeatSelEl2 = document.getElementById('repeat-select');
+      if (repeatSelEl2) repeatSelEl2.addEventListener('change', updateSubmitSummary);
+      var endsDateEl = document.getElementById('ends-date-input');
+      if (endsDateEl) endsDateEl.addEventListener('change', updateSubmitSummary);
+      var shiftsCountEl2 = document.getElementById('shifts-count-input');
+      if (shiftsCountEl2) shiftsCountEl2.addEventListener('change', updateSubmitSummary);
+      if (startBlock) startBlock.querySelectorAll('select').forEach(function(s) { s.addEventListener('change', updateSubmitSummary); });
+      if (endBlock) endBlock.querySelectorAll('select').forEach(function(s) { s.addEventListener('change', updateSubmitSummary); });
 
       checkFormValid();
+      updateSubmitSummary();
 
       // Summary panel helpers
       function toHour24(h, ampm) {
@@ -1148,10 +1187,12 @@
             var periodDiv = document.createElement('div');
             periodDiv.className = 'budget-period';
             var lbl = monthNames[p.month] + " '" + String(p.year).slice(-2);
-            var pct = Math.min(90, Math.round((p.hours / 250) * 45));
-            periodDiv.innerHTML = '<div class="budget-row"><span>' + lbl + '</span><span class="budget-requesting-text">Requesting ' + p.hours + 'h</span></div>' +
-              '<div class="budget-bar"><div class="budget-fill"></div><div class="budget-requested" style="width:' + pct + '%"></div></div>' +
-              '<div class="budget-row" style="margin-top:4px;"><span></span><span class="budget-hours">250h</span></div>';
+            var totalBudget = 200;
+            var alreadyWorkedPct = 24; // 48hrs / 200hrs
+            var requestedPct = Math.min(100 - alreadyWorkedPct, Math.round((p.hours / totalBudget) * 100));
+            periodDiv.innerHTML = '<div class="budget-row"><span>' + lbl + '</span><span class="budget-requesting-text">Requesting ' + p.hours + 'hrs</span></div>' +
+              '<div class="budget-bar"><div class="budget-fill"></div><div class="budget-requested" style="width:' + requestedPct + '%"></div></div>' +
+              '<div class="budget-row" style="margin-top:4px;"><span></span><span class="budget-hours">200hrs</span></div>';
             container.appendChild(periodDiv);
           });
         }
@@ -1342,14 +1383,18 @@
         });
 
         var shiftCount = getProposedShiftCount();
-        var flexLabel = shiftCount === 1 ? '1 Booked Flex' : shiftCount + ' Booked Flexes';
-        var totalHours = hours * shiftCount;
+        var peopleSel = document.getElementById('people-select');
+        var numPeople = (peopleSel && peopleSel.value) ? parseInt(peopleSel.value, 10) : 1;
+        if (isNaN(numPeople) || numPeople < 1) numPeople = 1;
+        var totalFlexes = numPeople * shiftCount;
+        var flexLabel = totalFlexes === 1 ? '1 Booked Flex' : totalFlexes + ' Booked Flexes';
+        var totalHours = hours * shiftCount * numPeople;
         var shiftDates = getShiftDates();
         if (shiftDates.length === 0) shiftDates = [new Date(dateVal)];
 
         var html = '<div class="booked-flex-header">';
         html += '<div class="booked-flex-info"><h3 class="booked-flex-title">' + flexLabel + '</h3>';
-        if (shiftCount > 1) html += '<div class="booked-flex-total-hrs"><i data-lucide="calendar-clock"></i><span>' + totalHours + ' hrs total</span></div>';
+        if (totalFlexes > 1) html += '<div class="booked-flex-total-hrs"><i data-lucide="calendar-clock"></i><span>' + totalHours + ' hrs total</span></div>';
         html += '<div class="booked-flex-location"><i data-lucide="map-pin"></i><span>' + locationText + '</span></div></div>';
         html += '<button class="cancel-btn">Cancel</button></div>';
 
@@ -1358,9 +1403,9 @@
           html += '<div class="booked-flex-shift">';
           html += '<div class="booked-flex-date">' + fmtDate(d) + '</div>';
           html += '<div class="booked-flex-time"><i data-lucide="clock"></i><span>' + timeLabel + '</span></div>';
-          selectedRoles.forEach(function(r) {
-            html += '<div class="booked-flex-role"><i data-lucide="' + r.icon + '"></i><span>' + r.name + '</span></div>';
-          });
+          if (selectedRoles.length > 0) {
+            html += '<div class="booked-flex-role">' + selectedRoles.map(function(r) { return r.name; }).join(', ') + '</div>';
+          }
           html += '</div>';
         });
 

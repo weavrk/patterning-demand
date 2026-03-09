@@ -325,11 +325,11 @@
     /* QuestionRoles - role checkboxes */
     .roles-section { margin-top: 8px; }
     .role-category { margin-bottom: 24px; }
-    .role-category-label { font-size: 14px; color: var(--text-hint); margin-bottom: 12px; }
-    .role-chips { display: flex; flex-wrap: wrap; gap: 4px; }
+    .role-category-label { font-size: 16px; color: var(--app-secondary); margin-bottom: 12px; }
+    .role-chips { display: flex; flex-wrap: wrap; column-gap: 6px; row-gap: 12px; }
     .role-chip {
       display: inline-flex; align-items: center; gap: 4px;
-      padding: 2px 8px; border-radius: 6px;
+      padding: 4px 10px; border-radius: 6px;
       border: 1px solid var(--black-alpha-200);
       background: var(--main-white);
       font-size: 16px; font-weight: 500; color: rgba(0,0,0,0.48);
@@ -374,7 +374,7 @@
     .budget-requested { height: 100%; background: #9DD9CF; border-radius: 0 6px 6px 0; width: 12%; min-width: 24px; flex-shrink: 0; }
 
     /* RequestWorkerCalendar */
-    .calendar-card { margin-top: 0; }
+    .calendar-card { margin-top: 0; background: none; border: none; }
     .calendar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
     .calendar-month { font-size: 16px; font-weight: 600; color: #616161; }
     .calendar-nav-btn { background: none; border: none; color: #A5A5A5; cursor: pointer; font-size: 18px; padding: 4px 8px; line-height: 1; }
@@ -634,7 +634,6 @@
           <a href="request-flex-insequence.html" class="variant-link">InSequence</a>
           <a href="request-flex-calendarview.html" class="variant-link">CalendarView</a>
           <a href="request-flex-newtabflow.html" class="variant-link">NewTabFlow</a>
-          <a href="request-flex-opx.html" class="variant-link">Opx</a>
         </nav>
         <div class="side-nav-spacer"></div>
       </nav>
