@@ -305,12 +305,12 @@
     }
     .form-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-end; }
     .form-row-item { display: flex; flex-direction: column; }
-    .switch-row { display: flex; align-items: center; gap: 8px; margin-top: 12px; font-size: 16px; color: var(--text-primary); cursor: pointer; }
+    .switch-row { display: flex; align-items: center; gap: 4px; margin-top: 12px; font-size: 16px; color: var(--text-primary); cursor: pointer; }
     .switch { width: 36px; height: 20px; border-radius: 10px; background: #e2e8f0; position: relative; cursor: pointer; flex-shrink: 0; transition: background 0.2s; }
     .switch.on { background: var(--green-500); }
     .switch-knob { width: 16px; height: 16px; border-radius: 50%; background: #fff; position: absolute; top: 2px; left: 2px; box-shadow: 0 1px 2px rgba(0,0,0,0.2); transition: left 0.2s; }
     .switch.on .switch-knob { left: 18px; }
-    .switch-info { color: var(--text-hint); }
+    .switch-info { width: 18px; height: 18px; flex-shrink: 0; color: var(--text-hint); }
     .form-divider { box-sizing: content-box; border-top: none; padding-top: 24px; margin-top: 24px; }
     .add-additional-row { display: flex; align-items: center; gap: 4px; width: 100%; margin-bottom: 32px; min-height: 40px; }
     .add-additional-divider { flex: 1; height: 1px; background: var(--black-alpha-200); }
@@ -733,36 +733,43 @@
               <div class="time-inputs-section">
                 <div class="start-block">
                   <label class="form-label-sm">Start Time</label>
-                  <div class="start-end-time-group">
-                    <div class="time-hm-wrap">
-                      <select class="form-select form-select-hour">
-                        <option value="">Hour</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                      </select>
-                      <div class="time-sep-wrap"><span class="time-sep">:</span></div>
-                      <select class="form-select form-select-min">
-                        <option value="">Mins</option>
-                        <option value="00">00</option>
-                        <option value="15">15</option>
-                        <option value="30">30</option>
-                        <option value="45">45</option>
+                  <div style="display:flex; flex-direction:row; align-items:center; gap:8px;">
+                    <div class="start-end-time-group">
+                      <div class="time-hm-wrap">
+                        <select class="form-select form-select-hour">
+                          <option value="">Hour</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                          <option value="6">6</option>
+                          <option value="7">7</option>
+                          <option value="8">8</option>
+                          <option value="9">9</option>
+                          <option value="10">10</option>
+                          <option value="11">11</option>
+                          <option value="12">12</option>
+                        </select>
+                        <div class="time-sep-wrap"><span class="time-sep">:</span></div>
+                        <select class="form-select form-select-min">
+                          <option value="">Mins</option>
+                          <option value="00">00</option>
+                          <option value="15">15</option>
+                          <option value="30">30</option>
+                          <option value="45">45</option>
+                        </select>
+                      </div>
+                      <select class="form-select form-select-ampm">
+                        <option value="AM" selected>AM</option>
+                        <option value="PM">PM</option>
                       </select>
                     </div>
-                    <select class="form-select form-select-ampm">
-                      <option value="AM" selected>AM</option>
-                      <option value="PM">PM</option>
-                    </select>
+                    <label class="switch-row" id="flexible-switch" style="margin-top:0;gap:4px;">
+                      <input type="checkbox" checked style="width:16px;height:16px;cursor:pointer;accent-color:var(--green-500,#4BA098);">
+                      <span>Flexible Start</span>
+                      <div style="display:flex;align-items:center;"><i data-lucide="info" class="switch-info"></i></div>
+                    </label>
                   </div>
                 </div>
                 <div class="end-block">
@@ -800,23 +807,7 @@
                   </div>
                 </div>
               </div>
-              <div class="time-divider-wrap">
-                <div class="time-divider"></div>
-              </div>
-              <div class="flexible-section">
-                <div class="flexible-label-wrap">
-                  <span>Flexible Start</span>
-                  <span class="info-tooltip-wrap">
-                    <i data-lucide="info" class="info-icon"></i>
-                    <span class="info-tooltip">Flexibility allows us to push back the start time to fill the shift, but the duration stays the same and ends by store close.</span>
-                  </span>
-                </div>
-                <div class="flex-pills flex-pills-stacked">
-                  <button type="button" class="flex-pill">+1 hr</button>
-                  <button type="button" class="flex-pill active">+2 hrs</button>
-                  <button type="button" class="flex-pill">+3 hrs</button>
-                </div>
-              </div>
+
             </div>
           </div>
 
