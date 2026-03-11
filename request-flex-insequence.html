@@ -616,43 +616,6 @@
     }
     .shifts-label { font-size: 16px; color: var(--app-primary); flex-shrink: 0; }
 
-    /* Variant navigation in sidebar */
-    .variant-nav {
-      margin: 20px 24px 0 0;
-      padding: 0 12px;
-    }
-    .variant-nav-label {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      color: var(--text-hint);
-      margin-bottom: 8px;
-    }
-    .variant-link {
-      display: flex;
-      align-items: center;
-      border-radius: 6px;
-      margin-bottom: 4px;
-      padding: 6px 8px 6px 0;
-      text-decoration: none;
-      color: var(--app-secondary);
-      font-weight: 500;
-      cursor: pointer;
-      transition: background 0.15s, color 0.15s;
-      font-size: 12px;
-    }
-    .variant-link:hover {
-      background: none;
-      color: var(--app-primary);
-    }
-    .variant-link.active {
-      color: var(--text-primary);
-      font-weight: 600;
-    }
-    .variant-link.active:hover {
-      color: var(--app-primary);
-    }
-
     @media (max-width: 1024px) {
       .nav-area { min-width: 260px; }
     }
@@ -688,13 +651,6 @@
           </div>
           <button class="reviews-alert-btn">Leave Reviews</button>
         </div>
-        <nav class="variant-nav">
-          <div class="variant-nav-label">Prototype Variants</div>
-          <a href="request-flex.html" class="variant-link">Original</a>
-          <a href="request-flex-insequence.html" class="variant-link active">InSequence</a>
-          <a href="request-flex-calendarview.html" class="variant-link">CalendarView</a>
-          <a href="request-flex-newtabflow.html" class="variant-link">NewTabFlow</a>
-        </nav>
         <div class="side-nav-spacer"></div>
       </nav>
       <div class="nav-footer">
